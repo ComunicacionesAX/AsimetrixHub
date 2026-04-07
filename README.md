@@ -1,10 +1,6 @@
-# Install HUB - Asimetrix
+# Asimetrix Hub
 
-Centro de recursos para instalación, configuración y soporte de productos Asimetrix.
-
-## Secciones
-
-- **Inicio**: Página principal del Install HUB
+- **Inicio**: Página principal de Asimetrix Hub
 - **Guías de Instalación**: Paso a paso detallado para instalar productos
 - **Base de Conocimiento**: Tutoriales y videos de uso
 - **Soporte**: Contacto con equipo de soporte y agente Onix
