@@ -1,1 +1,9 @@
-{"name": "AsimetrixHub", "builds": [{"src": "index.html", "use": "@vercel/static"}], "routes": [{"src": "/(.*)", "dest": "/index.html"}]}
+{
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "routes": [
+    { "src": "/[^.]+$", "dest": "/index.html", "status": 200 },
+    { "src": "/(.*)", "dest": "/$1" }
+  ]
+}
