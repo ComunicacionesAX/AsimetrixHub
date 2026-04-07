@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Install HUB | Asimetrix</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #014469;
+            --primary-dark: #001a2e;
+            --primary-light: #9bccf7;
+            --primary-container: #275c82;
+            --accent: #4BA2FF;
+            --accent-aqua: #00E3FF;
+            --accent-aqua-gray: #7EC6DE;
+            --tertiary: #00484f;
+            --tertiary-container: #94f1fc;
+            --text: #181c1d;
+            --text-light: #41474e;
+            --bg: #f6fafb;
+            --surface: #f6fafb;
+            --surface-container-lowest: #ffffff;
+            --surface-container-low: #f0f4f5;
+            --surface-container: #eaeef0;
+            --surface-container-high: #e5e9ea;
+            --surface-container-highest: #dfe3e4;
+            --outline: #72787f;
+            --outline-variant: #c1c7cf;
+            --success: #166534;
+            --success-bg: #dcfce7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            min-height: 100vh;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .header {
+            background: var(--surface);
+            padding: 0 1.5rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            height: 64px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1.5rem;
+            border-bottom: 1px solid rgba(114, 120, 127, 0.1);
+        }
+
+        .header-brand { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-asimetrix { height: 32px; width: auto; }
+        .header-title { display: flex; align-items: center; gap: 0.5rem; }
+        .header-title .material-symbols-outlined { color: var(--primary); font-size: 24px; }
+        .header-title h1 { font-size: 1rem; font-weight: 700; color: var(--primary); }
+
+        .nav { display: flex; gap: 0.25rem; }
+
+        .nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav a:hover { background: rgba(1, 68, 105, 0.08); color: var(--primary); }
+        .nav a.active { background: rgba(1, 68, 105, 0.12); color: var(--primary); font-weight: 600; }
+
+        main { margin-top: 64px; padding-bottom: 4rem; }
+
+        .page { display: none; }
+        .page.active { display: block; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+        .section { padding: 3rem 1.5rem; }
+        .section-alt { background: var(--surface-container-low); }
+
+        .hero {
+            padding: 2rem 1.5rem 3rem;
+            background: var(--bg);
+        }
+
+        .hero h1 {
+            font-size: 1.75rem;
+            color: var(--text);
+            margin-bottom: 0.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--surface-container-lowest);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon.primary { background: rgba(1, 68, 105, 0.1); }
+        .card-icon.accent { background: rgba(75, 162, 255, 0.1); }
+        .card-icon.aqua { background: rgba(0, 70, 79, 0.1); }
+
+        .card-icon .material-symbols-outlined { font-size: 24px; }
+        .card-icon.primary .material-symbols-outlined { color: var(--primary); }
+        .card-icon.accent .material-symbols-outlined { color: var(--accent); }
+        .card-icon.aqua .material-symbols-outlined { color: var(--tertiary); }
+
+        .card h3 { font-size: 1.125rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 700; }
+        .card p { color: var(--text-light); margin-bottom: 1rem; font-size: 0.9375rem; line-height: 1.6; }
+
+        .card-link {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .card-link .material-symbols-outlined { font-size: 18px; transition: transform 0.2s; }
+        .card:hover .card-link .material-symbols-outlined { transform: translateX(4px); }
+
+        .product-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .product-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 1.5rem;
+            background: var(--surface-container-lowest);
+            border: 1px solid rgba(114, 120, 127, 0.12);
+            border-radius: 12px;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9375rem;
+            transition: all 0.3s;
+        }
+
+        .product-btn:hover {
+            background: var(--surface-container-low);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .product-btn .material-symbols-outlined { font-size: 20px; color: var(--primary); }
+
+        .step-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .step-card {
+            background: var(--surface-container-lowest);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border: 1px solid rgba(114, 120, 127, 0.08);
+            border-top: 4px solid var(--primary-container);
+        }
+
+        .step-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .step-card-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--outline);
+            opacity: 0.3;
+            line-height: 1;
+        }
+
+        .step-card-icon .material-symbols-outlined {
+            font-size: 32px;
+            color: var(--primary);
+        }
+
+        .step-card h3 {
+            font-size: 1.125rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-card p {
+            color: var(--text-light);
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .checklist {
+            list-style: none;
+            background: var(--surface-container-high);
+            padding: 1rem;
+            border-radius: 0.75rem;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .checklist li:last-child { margin-bottom: 0; }
+        .checklist li .material-symbols-outlined { color: var(--tertiary); font-size: 18px; }
+
+        .led-indicator {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            background: var(--surface-container-high);
+            padding: 1rem;
+            border-radius: 0.75rem;
+        }
+
+        .led-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .led {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .led-green { background: #22c55e; }
+        .led-blue { background: #3b82f6; }
+        .led-red { background: #ef4444; }
+
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+        }
+
+        .component-item {
+            background: var(--surface-container-low);
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .component-item .material-symbols-outlined { font-size: 24px; color: var(--primary); margin-bottom: 0.25rem; }
+        .component-item span { font-size: 0.75rem; font-weight: 600; color: var(--text); }
+
+        .info-card {
+            background: rgba(0, 70, 79, 0.1);
+            border: 1px solid rgba(0, 70, 79, 0.2);
+            padding: 1rem;
+            border-radius: 0.75rem;
+        }
+
+        .info-card h4 {
+            color: var(--tertiary);
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-card h4 .material-symbols-outlined { font-size: 18px; }
+        .info-card p { color: var(--text-light); font-size: 0.8125rem; line-height: 1.6; }
+
+        .warning-card {
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid rgba(234, 179, 8, 0.3);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .warning-card h4 {
+            color: #b45309;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .warning-card h4 .material-symbols-outlined { font-size: 18px; }
+        .warning-card ul { list-style: none; }
+        .warning-card li {
+            color: var(--text);
+            font-size: 0.8125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .breadcrumb a { color: var(--primary); text-decoration: none; font-weight: 500; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { color: var(--text-light); }
+
+        .team-section {
+            background: var(--surface-container-low);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-section h4 {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .team-section > p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: var(--surface-container-lowest);
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 64px;
+            height: 64px;
+            background: var(--primary-container);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .team-avatar .material-symbols-outlined { font-size: 32px; color: white; }
+
+        .team-card h5 { font-size: 1.125rem; color: var(--text); margin-bottom: 0.25rem; font-weight: 700; }
+        .team-card p { font-size: 0.875rem; color: var(--text-light); margin-bottom: 0.5rem; }
+        .team-card a { font-size: 0.875rem; color: var(--text-light); text-decoration: none; display: block; }
+        .team-card a:hover { color: var(--primary); }
+        .team-card .phone { color: var(--primary); font-weight: 600; }
+
+        .footer {
+            background: var(--surface-container-low);
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            line-height: 1.7;
+        }
+
+        .footer h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text);
+        }
+
+        .footer ul { list-style: none; }
+        .footer li { margin-bottom: 0.5rem; }
+        .footer a { color: var(--text-light); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .footer a:hover { color: var(--primary); }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(114, 120, 127, 0.1);
+            text-align: center;
+        }
+
+        .footer-bottom p { font-size: 0.8125rem; color: var(--text-light); }
+
+        .onix-btn {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 50;
+        }
+
+        .onix-btn .btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-container) 100%);
+            color: white;
+            padding: 0.875rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(1, 68, 105, 0.3);
+        }
+
+        .onix-btn .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(1, 68, 105, 0.4);
+        }
+
+        .onix-btn .material-symbols-outlined { font-size: 20px; }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(1, 68, 105, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .section-label .material-symbols-outlined { font-size: 16px; }
+
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.375rem 0.75rem;
+            background: rgba(1, 68, 105, 0.1);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 9999px;
+        }
+
+        .info-badge .material-symbols-outlined { font-size: 14px; }
+
+        .info-badge.tertiary {
+            background: rgba(0, 70, 79, 0.1);
+            color: var(--tertiary);
+        }
+
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .hero h1 { font-size: 1.5rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .step-cards-grid { grid-template-columns: 1fr; }
+            .footer-content { grid-template-columns: 1fr; gap: 1.5rem; }
+            .product-buttons { flex-direction: column; }
+            .team-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="active" onclick="showPage('home')">Bienvenido</a>
+            <a href="#" onclick="showPage('guide')">Guías</a>
+            <a href="#" onclick="showPage('knowledge')">Tutoriales</a>
+        </nav>
+        <div class="header-brand">
+            <img src="Isologo.png" alt="Asimetrix" class="logo-asimetrix">
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page active">
+            <section class="hero">
+                <div class="container" style="text-align: center;">
+                    <img src="Isologo.png" alt="Asimetrix" style="height: 48px; width: auto; margin-bottom: 1rem;">
+                    <h1>Bienvenido a Asimetrix Hub</h1>
+                    <p style="text-align: center; margin: 0.5rem auto 0;">
+                        <span style="font-size: 0.75rem; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: 1px;">Tu centro de conocimiento.</span><br><br>
+                        Encuentra guías de instalación, configuración, mantenimiento y tutoriales sobre el uso de nuestros productos y herramientas digitales.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.5rem; font-weight: 800;">¿En qué te podemos ayudar?</h2>
+                    <div class="cards-grid">
+                        <div class="card" onclick="showPage('guide')">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">menu_book</span>
+                            </div>
+                            <h3>Guías de Instalación</h3>
+                            <p>Paso a paso detallado para instalar, configurar y mantener cada uno de nuestros productos.</p>
+                            <span class="card-link">
+                                Ver guías
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </span>
+                        </div>
+                        <div class="card" onclick="showPage('knowledge')">
+                            <div class="card-icon accent">
+                                <span class="material-symbols-outlined">play_circle</span>
+                            </div>
+                            <h3>Tutoriales</h3>
+                            <p>Videos y guías para aprender a usar el dashboard y aprovechar todas las funcionalidades.</p>
+                            <span class="card-link">
+                                Ver tutoriales
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- GUIDE PAGE -->
+        <div id="page-guide" class="page">
+            <section class="hero" style="background: var(--surface-container-low);">
+                <div class="container">
+                    <h1 style="color: var(--text);">Guías</h1>
+                    <p>Selecciona el producto para ver su guía de instalación, configuración y mantenimiento.</p>
+                </div>
+            </section>
+
+            <section class="section" style="background: var(--surface-container-low);">
+                <div class="container">
+                    <div class="cards-grid">
+                        <div class="card" onclick="showPage('guide-nodos')">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">sensors</span>
+                            </div>
+                            <h3>Nodos Ambientales</h3>
+                            <p>Sensores de temperatura, humedad y CO2 para monitoreo ambiental.</p>
+                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon aqua">
+                                <span class="material-symbols-outlined">videocam</span>
+                            </div>
+                            <h3>PigVision</h3>
+                            <p>Cámara de pesaje e inteligencia artificial para análisis.</p>
+                            <span class="card-link">Próximamente <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon accent">
+                                <span class="material-symbols-outlined">precision_manufacturing</span>
+                            </div>
+                            <h3>Insylo</h3>
+                            <p>Sistema de control y automatización para galpones.</p>
+                            <span class="card-link">Próximamente <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- GUIDE NODOS SUBMENU PAGE -->
+        <div id="page-guide-nodos" class="page">
+            <section class="hero" style="background: var(--surface-container-low);">
+                <div class="container">
+                    <p class="breadcrumb"><a href="#" onclick="showPage('guide')">Guías</a> <span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span> Nodos Ambientales</p>
+                    <h1 style="color: var(--text);">Nodos Ambientales</h1>
+                    <p>Selecciona el nodo para ver su guía.</p>
+                </div>
+            </section>
+
+            <section class="section" style="background: var(--surface-container-low);">
+                <div class="container">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">device_thermostat</span>
+                            </div>
+                            <h3>Nodo autónomo de temperatura y humedad</h3>
+                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon accent">
+                                <span class="material-symbols-outlined">light_mode</span>
+                            </div>
+                            <h3>Nodo autónomo temperatura, humedad y luz</h3>
+                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card" onclick="window.open('https://asimetrix-nodo-t-h-y-co-2.vercel.app/', '_blank')">
+                            <div class="card-icon aqua">
+                                <span class="material-symbols-outlined">co2</span>
+                            </div>
+                            <h3>Nodo alimentado temperatura, humedad y CO2</h3>
+                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">water_drop</span>
+                            </div>
+                            <h3>Nodo autónomo temperatura de agua en tanque</h3>
+                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon accent">
+                                <span class="material-symbols-outlined">air</span>
+                            </div>
+                            <h3>Nodo autónomo viento</h3>
+                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- KNOWLEDGE PAGE -->
+        <div id="page-knowledge" class="page">
+            <section class="hero">
+                <div class="container">
+                    <span class="section-label"><span class="material-symbols-outlined">school</span> Tutoriales</span>
+                    <h1>Base de Conocimiento</h1>
+                    <p>Videos y guías para aprender a usar tus productos Asimetrix.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div class="card-icon accent">
+                                <span class="material-symbols-outlined">dashboard</span>
+                            </div>
+                            <h3>Dashboard</h3>
+                            <p>Aprende a navegar y configurar el panel de control de Asimetrix.</p>
+                            <span style="font-size: 0.875rem; color: var(--text-light);">4 tutoriales disponibles</span>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">sensors</span>
+                            </div>
+                            <h3>Nodos Ambientales</h3>
+                            <p>Configuración y uso de los sensores de temperatura, humedad y CO2.</p>
+                            <span style="font-size: 0.875rem; color: var(--text-light);">4 tutoriales disponibles</span>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon aqua">
+                                <span class="material-symbols-outlined">videocam</span>
+                            </div>
+                            <h3>PigVision</h3>
+                            <p>Uso de la cámara de pesaje y análisis de datos.</p>
+                            <span style="font-size: 0.875rem; color: var(--text-light);">4 tutoriales disponibles</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="Isologo.png" alt="Asimetrix" style="height: 28px; width: auto;">
+                <p>Monitoreo inteligente para tu producción. Cámaras inteligentes, sensores y herramientas de IA que transforman datos en rentabilidad.</p>
+            </div>
+            <div>
+                <h4>HUB</h4>
+                <ul>
+                    <li><a href="#" onclick="showPage('guide')">Guías</a></li>
+                    <li><a href="#" onclick="showPage('knowledge')">Tutoriales</a></li>
+                    <li><a href="https://onix.asimetrix.co/" target="_blank">Chatear con Onix</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Soporte</h4>
+                <ul>
+                    <li><a href="mailto:damian.garcia@asimetrix.co">Damian García</a></li>
+                    <li><a href="tel:+573112078988">+57 311 2078988</a></li>
+                    <li><a href="mailto:manuela.chavarria@asimetrix.co">Manuela Chavarría</a></li>
+                    <li><a href="tel:+573182202707">+57 318 2202707</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Asimetrix - Monitoreo inteligente para tu producción</p>
+        </div>
+    </footer>
+
+    <div class="onix-btn">
+        <a href="https://onix.asimetrix.co/" target="_blank" class="btn">
+            <span class="material-symbols-outlined">chat</span>
+            ¡Soy Onix! Hablemos
+        </a>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav a[onclick="showPage('${pageId}')"]`);
+            if (activeLink) activeLink.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
