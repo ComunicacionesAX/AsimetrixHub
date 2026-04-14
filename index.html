@@ -899,8 +899,17 @@
 
         let currentLang = 'es';
 
+        // Check localStorage on load
+        const savedLang = localStorage.getItem('asimetrix-lang');
+        if (savedLang) {
+            currentLang = savedLang;
+            document.getElementById('lang-label').textContent = currentLang.toUpperCase();
+            applyTranslations();
+        }
+
         function toggleLanguage() {
             currentLang = currentLang === 'es' ? 'en' : 'es';
+            localStorage.setItem('asimetrix-lang', currentLang);
             document.getElementById('lang-label').textContent = currentLang.toUpperCase();
             applyTranslations();
         }
