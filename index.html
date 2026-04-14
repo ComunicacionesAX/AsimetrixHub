@@ -637,10 +637,10 @@
                 <div class="container">
                     <a href="https://asimetrix-hub.vercel.app/" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 1rem;">
                         <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-                        Volver al Hub
+                        <span data-es="Volver al Hub" data-en="Back to Hub">Volver al Hub</span>
                     </a>
-                    <h1 style="color: var(--text);">Guías</h1>
-                    <p>Selecciona el producto para ver su guía de instalación, configuración y mantenimiento.</p>
+                    <h1 style="color: var(--text);" data-es="Guías" data-en="Guides">Guías</h1>
+                    <p data-es="Selecciona el producto para ver su guía de instalación, configuración y mantenimiento." data-en="Select the product to view its installation, configuration and maintenance guide.">Selecciona el producto para ver su guía de instalación, configuración y mantenimiento.</p>
                 </div>
             </section>
 
@@ -651,33 +651,33 @@
                             <div class="card-icon aqua">
                                 <span class="material-symbols-outlined">videocam</span>
                             </div>
-                            <h3>PigVision</h3>
-                            <p>Cámara de pesaje e inteligencia artificial para análisis.</p>
-                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                            <h3 data-es="PigVision" data-en="PigVision">PigVision</h3>
+                            <p data-es="Cámara de pesaje e inteligencia artificial para análisis." data-en="Weighing camera and artificial intelligence for analysis.">Cámara de pesaje e inteligencia artificial para análisis.</p>
+                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
                         </div>
                         <div class="card" onclick="window.open('https://landing-insylo.vercel.app/', '_blank')">
                             <div class="card-icon primary">
                                 <span class="material-symbols-outlined">grain</span>
                             </div>
-                            <h3>Insylo</h3>
-                            <p>Sistema de control y automatización para galpones.</p>
-                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                            <h3 data-es="Insylo" data-en="Insylo">Insylo</h3>
+                            <p data-es="Sistema de control y automatización para galpones." data-en="Control and automation system for poultry houses.">Sistema de control y automatización para galpones.</p>
+                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
                         </div>
                         <div class="card" onclick="showPage('guide-nodos')">
                             <div class="card-icon primary">
                                 <span class="material-symbols-outlined">sensors</span>
                             </div>
-                            <h3>Nodos Ambientales</h3>
-                            <p>Sensores de temperatura, humedad y CO2 para monitoreo ambiental.</p>
-                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                            <h3 data-es="Nodos Ambientales" data-en="Ambient Nodes">Nodos Ambientales</h3>
+                            <p data-es="Sensores de temperatura, humedad y CO2 para monitoreo ambiental." data-en="Temperature, humidity and CO2 sensors for environmental monitoring.">Sensores de temperatura, humedad y CO2 para monitoreo ambiental.</p>
+                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
                         </div>
                         <div class="card" onclick="window.open('https://gateway-lyart-one.vercel.app/', '_blank')">
                             <div class="card-icon primary">
                                 <span class="material-symbols-outlined">router</span>
                             </div>
-                            <h3>Gateway</h3>
-                            <p>Dispositivo de conectividad y comunicación para la red de sensores.</p>
-                            <span class="card-link">Ver guía <span class="material-symbols-outlined">arrow_forward</span></span>
+                            <h3 data-es="Gateway" data-en="Gateway">Gateway</h3>
+                            <p data-es="Dispositivo de conectividad y comunicación para la red de sensores." data-en="Connectivity and communication device for sensor network.">Dispositivo de conectividad y comunicación para la red de sensores.</p>
+                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
                         </div>
                     </div>
                 </div>
@@ -924,23 +924,15 @@
         }
 
         function applyTranslations() {
-            const t = translations[currentLang];
-            document.querySelector('h1').textContent = t.welcome;
-            
-            // Update elements with data attributes
+            // Update all elements with data attributes
             document.querySelectorAll('[data-es]').forEach(el => {
                 const key = el.getAttribute('data-' + currentLang);
                 if (key) el.textContent = key;
             });
             
-            // Update other specific elements
-            document.querySelectorAll('h2')[0].textContent = t.howCanWeHelp;
-            document.querySelectorAll('h3')[0].textContent = t.installationGuides;
-            document.querySelectorAll('h3')[1].textContent = t.tutorials;
-            
             // Update onix button
             const onixBtn = document.querySelector('.onix-btn .btn');
-            if (onixBtn) onixBtn.innerHTML = '<span class="material-symbols-outlined">chat</span>' + t.onixButton;
+            if (onixBtn) onixBtn.innerHTML = '<span class="material-symbols-outlined">chat</span>' + translations[currentLang].onixButton;
         }
     </script>
 </body>
