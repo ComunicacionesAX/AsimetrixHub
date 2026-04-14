@@ -905,6 +905,15 @@
             applyTranslations();
         }
 
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav a[onclick="showPage('${pageId}')"]`);
+            if (activeLink) activeLink.classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
         function applyTranslations() {
             const t = translations[currentLang];
             document.querySelector('h1').textContent = t.welcome;
