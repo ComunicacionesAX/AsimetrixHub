@@ -546,6 +546,20 @@
             color: var(--tertiary);
         }
 
+        .lang-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-right: 0.75rem;
+        }
+
+        .lang-toggle:hover { opacity: 0.9; }
+
         @media (max-width: 768px) {
             .nav { display: none; }
             .hero h1 { font-size: 1.5rem; }
@@ -560,11 +574,14 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="#" class="active" onclick="showPage('home')">Bienvenido</a>
-            <a href="#" onclick="showPage('guide')">Guías</a>
-            <a href="#" onclick="window.open('https://asimetrix.notion.site/Base-de-Conocimiento-ec00644a794f4ee08517a676fb688c2a', '_blank')">Tutoriales</a>
+            <a href="#" class="active" onclick="showPage('home')" data-es="Bienvenido" data-en="Welcome">Bienvenido</a>
+            <a href="#" onclick="showPage('guide')" data-es="Guías" data-en="Guides">Guías</a>
+            <a href="#" onclick="window.open('https://asimetrix.notion.site/Base-de-Conocimiento-ec00644a794f4ee08517a676fb688c2a', '_blank')" data-es="Tutoriales" data-en="Tutorials">Tutoriales</a>
         </nav>
         <div class="header-brand">
+            <button onclick="toggleLanguage()" class="lang-toggle">
+                <span id="lang-label">ES</span>
+            </button>
             <img src="Isologo.png" alt="Asimetrix" class="logo-asimetrix">
         </div>
     </header>
@@ -803,13 +820,109 @@
     </div>
 
     <script>
-        function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + pageId).classList.add('active');
-            document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
-            const activeLink = document.querySelector(`.nav a[onclick="showPage('${pageId}')"]`);
-            if (activeLink) activeLink.classList.add('active');
-            window.scrollTo(0, 0);
+        const translations = {
+            es: {
+                welcome: "Bienvenido a Asimetrix Hub",
+                centerOfKnowledge: "Tu centro de conocimiento.",
+                description: "Encuentra guías de instalación, configuración, mantenimiento y tutoriales sobre el uso de nuestros productos y herramientas digitales.",
+                howCanWeHelp: "¿En qué te podemos ayudar?",
+                installationGuides: "Guías de Instalación",
+                installationGuidesDesc: "Paso a paso detallado para instalar, configurar y mantener cada uno de nuestros productos.",
+                viewGuides: "Ver guías",
+                tutorials: "Tutoriales",
+                tutorialsDesc: "Videos y guías para aprender a usar el dashboard y aprovechar todas las funcionalidades.",
+                viewTutorials: "Ver tutoriales",
+                guides: "Guías",
+                guidesDesc: "Selecciona el producto para ver su guía de instalación, configuración y mantenimiento.",
+                backToHub: "Volver al Hub",
+                nodosAmbientales: "Nodos Ambientales",
+                nodosAmbientalesDesc: "Sensores de temperatura, humedad y CO2 para monitoreo ambiental.",
+                viewGuide: "Ver guía",
+                pigvision: "PigVision",
+                pigvisionDesc: "Cámara de pesaje e inteligencia artificial para análisis.",
+                insylo: "Insylo",
+                insyloDesc: "Sistema de control y automatización para galpones.",
+                gateway: "Gateway",
+                gatewayDesc: "Dispositivo de conectividad y comunicación para la red de sensores.",
+                nodosTitle: "Nodos Ambientales",
+                nodosSubtitle: "Selecciona el nodo para ver su guía.",
+                nodeTH: "Nodo autónomo de temperatura y humedad",
+                nodeTHLuz: "Nodo autónomo temperatura, humedad y luz",
+                nodeCO2: "Nodo alimentado temperatura, humedad y CO2",
+                nodeNH3: "Nodo alimentado NH3, temperatura y humedad",
+                soon: "Próximamente",
+                hub: "HUB",
+                soporte: "Soporte",
+                chatOnix: "Chatear con Onix",
+                footerText: "Monitoreo inteligente para tu producción. Cámaras inteligentes, sensores y herramientas de IA que transforman datos en rentabilidad.",
+                copyright: "© 2026 Asimetrix - Monitoreo inteligente para tu producción",
+                onixButton: "¡Soy Onix! Hablemos"
+            },
+            en: {
+                welcome: "Welcome to Asimetrix Hub",
+                centerOfKnowledge: "Your knowledge center.",
+                description: "Find installation, configuration, maintenance guides and tutorials on using our products and digital tools.",
+                howCanWeHelp: "How can we help you?",
+                installationGuides: "Installation Guides",
+                installationGuidesDesc: "Step-by-step detailed instructions to install, configure and maintain each of our products.",
+                viewGuides: "View guides",
+                tutorials: "Tutorials",
+                tutorialsDesc: "Videos and guides to learn how to use the dashboard and take advantage of all features.",
+                viewTutorials: "View tutorials",
+                guides: "Guides",
+                guidesDesc: "Select the product to view its installation, configuration and maintenance guide.",
+                backToHub: "Back to Hub",
+                nodosAmbientales: "Ambient Nodes",
+                nodosAmbientalesDesc: "Temperature, humidity and CO2 sensors for environmental monitoring.",
+                viewGuide: "View guide",
+                pigvision: "PigVision",
+                pigvisionDesc: "Weighing camera and artificial intelligence for analysis.",
+                insylo: "Insylo",
+                insyloDesc: "Control and automation system for poultry houses.",
+                gateway: "Gateway",
+                gatewayDesc: "Connectivity and communication device for sensor network.",
+                nodosTitle: "Ambient Nodes",
+                nodosSubtitle: "Select the node to view its guide.",
+                nodeTH: "Autonomous temperature and humidity node",
+                nodeTHLuz: "Autonomous temperature, humidity and light node",
+                nodeCO2: "Powered temperature, humidity and CO2 node",
+                nodeNH3: "Powered NH3, temperature and humidity node",
+                soon: "Coming soon",
+                hub: "HUB",
+                soporte: "Support",
+                chatOnix: "Chat with Onix",
+                footerText: "Intelligent monitoring for your production. Smart cameras, sensors and AI tools that transform data into profitability.",
+                copyright: "© 2026 Asimetrix - Intelligent monitoring for your production",
+                onixButton: "I'm Onix! Let's talk"
+            }
+        };
+
+        let currentLang = 'es';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            document.getElementById('lang-label').textContent = currentLang.toUpperCase();
+            applyTranslations();
+        }
+
+        function applyTranslations() {
+            const t = translations[currentLang];
+            document.querySelector('h1').textContent = t.welcome;
+            
+            // Update elements with data attributes
+            document.querySelectorAll('[data-es]').forEach(el => {
+                const key = el.getAttribute('data-' + currentLang);
+                if (key) el.textContent = key;
+            });
+            
+            // Update other specific elements
+            document.querySelectorAll('h2')[0].textContent = t.howCanWeHelp;
+            document.querySelectorAll('h3')[0].textContent = t.installationGuides;
+            document.querySelectorAll('h3')[1].textContent = t.tutorials;
+            
+            // Update onix button
+            const onixBtn = document.querySelector('.onix-btn .btn');
+            if (onixBtn) onixBtn.innerHTML = '<span class="material-symbols-outlined">chat</span>' + t.onixButton;
         }
     </script>
 </body>
