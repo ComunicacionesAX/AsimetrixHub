@@ -574,9 +574,9 @@
 <body>
     <header class="header">
         <nav class="nav">
-            <a href="#" class="active" onclick="showPage('home')" data-es="Bienvenido" data-en="Welcome">Bienvenido</a>
-            <a href="#" onclick="showPage('guide')" data-es="Guías" data-en="Guides">Guías</a>
-            <a href="#" onclick="window.open('https://asimetrix.notion.site/Base-de-Conocimiento-ec00644a794f4ee08517a676fb688c2a', '_blank')" data-es="Tutoriales" data-en="Tutorials">Tutoriales</a>
+            <a href="#" class="active" onclick="showPage('home')" data-es="Inicio" data-en="Home">Inicio</a>
+            <a href="#" onclick="showPage('smartfarm')" data-es="Smart Farm" data-en="Smart Farm">Smart Farm</a>
+            <a href="#" onclick="showPage('know')" data-es="Know" data-en="Know">Know</a>
         </nav>
         <div class="header-brand">
             <button onclick="toggleLanguage()" class="lang-toggle">
@@ -595,34 +595,110 @@
                     <h1>Bienvenido a Asimetrix Hub</h1>
                     <p style="text-align: center; margin: 0.5rem auto 0;">
                         <span style="font-size: 0.75rem; font-weight: 600; color: var(--primary); text-transform: uppercase; letter-spacing: 1px;">Tu centro de conocimiento.</span><br><br>
-                        Encuentra guías de instalación, configuración, mantenimiento y tutoriales sobre el uso de nuestros productos y herramientas digitales.
+                        Explora <strong>Smart Farm</strong> para guías de instalación y tutoriales de productos. Accede a <strong>Know</strong> para tutoriales de la plataforma de monitoreo.
                     </p>
                 </div>
             </section>
 
             <section class="section">
                 <div class="container">
-                    <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.5rem; font-weight: 800;">¿En qué te podemos ayudar?</h2>
+                    <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.5rem; font-weight: 800;">Explora nuestras secciones</h2>
                     <div class="cards-grid">
-                        <div class="card" onclick="showPage('guide')">
+                        <div class="card" onclick="showPage('smartfarm')">
                             <div class="card-icon primary">
-                                <span class="material-symbols-outlined">menu_book</span>
+                                <span class="material-symbols-outlined">agriculture</span>
                             </div>
-                            <h3>Guías de Instalación</h3>
-                            <p>Paso a paso detallado para instalar, configurar y mantener cada uno de nuestros productos.</p>
+                            <h3>Smart Farm</h3>
+                            <p>Guías de instalación y tutoriales para productos como PigVision, Insylo, Nodos Ambientales y Gateway.</p>
                             <span class="card-link">
-                                Ver guías
+                                Ir a Smart Farm
                                 <span class="material-symbols-outlined">arrow_forward</span>
                             </span>
                         </div>
+                        <div class="card" onclick="showPage('know')">
+                            <div class="card-icon accent">
+                                <span class="material-symbols-outlined">monitoring</span>
+                            </div>
+                            <h3>Know</h3>
+                            <p>Tutoriales para navegar, filtrar y analizar datos en la plataforma de monitoreo Know.</p>
+                            <span class="card-link">
+                                Ir a Know
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- SMART FARM PAGE -->
+        <div id="page-smartfarm" class="page">
+            <section class="hero" style="background: var(--surface-container-low);">
+                <div class="container">
+                    <span class="section-label"><span class="material-symbols-outlined">agriculture</span> Smart Farm</span>
+                    <h1 style="color: var(--text);" data-es="Smart Farm" data-en="Smart Farm">Smart Farm</h1>
+                    <p data-es="Guías de instalación y tutoriales para productos Asimetrix." data-en="Installation guides and tutorials for Asimetrix products.">Guías de instalación y tutoriales para productos Asimetrix.</p>
+                </div>
+            </section>
+
+            <section class="section" style="background: var(--surface-container-low);">
+                <div class="container">
+                    <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.5rem; font-weight: 800;">
+                        <span class="material-symbols-outlined" style="font-size: 24px; vertical-align: middle; margin-right: 0.5rem; color: var(--primary);">menu_book</span>
+                        <span data-es="Guías de Instalación" data-en="Installation Guides">Guías de Instalación</span>
+                    </h2>
+                    <div class="cards-grid">
+                        <div class="card" onclick="window.open('https://landing-pig-vision.vercel.app/', '_blank')">
+                            <div class="card-icon aqua">
+                                <span class="material-symbols-outlined">videocam</span>
+                            </div>
+                            <h3 data-es="PigVision" data-en="PigVision">PigVision</h3>
+                            <p data-es="Cámara de pesaje e inteligencia artificial para análisis." data-en="Weighing camera and artificial intelligence for analysis.">Cámara de pesaje e inteligencia artificial para análisis.</p>
+                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card" onclick="window.open('https://landing-insylo.vercel.app/', '_blank')">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">grain</span>
+                            </div>
+                            <h3 data-es="Insylo" data-en="Insylo">Insylo</h3>
+                            <p data-es="Sistema de control y automatización para galpones." data-en="Control and automation system for poultry houses.">Sistema de control y automatización para galpones.</p>
+                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card" onclick="showPage('guide-nodos')">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">sensors</span>
+                            </div>
+                            <h3 data-es="Nodos Ambientales" data-en="Ambient Nodes">Nodos Ambientales</h3>
+                            <p data-es="Sensores de temperatura, humedad y CO2 para monitoreo ambiental." data-en="Temperature, humidity and CO2 sensors for environmental monitoring.">Sensores de temperatura, humedad y CO2 para monitoreo ambiental.</p>
+                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                        <div class="card" onclick="window.open('https://gateway-lyart-one.vercel.app/', '_blank')">
+                            <div class="card-icon primary">
+                                <span class="material-symbols-outlined">router</span>
+                            </div>
+                            <h3 data-es="Gateway" data-en="Gateway">Gateway</h3>
+                            <p data-es="Dispositivo de conectividad y comunicación para la red de sensores." data-en="Connectivity and communication device for sensor network.">Dispositivo de conectividad y comunicación para la red de sensores.</p>
+                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.5rem; font-weight: 800;">
+                        <span class="material-symbols-outlined" style="font-size: 24px; vertical-align: middle; margin-right: 0.5rem; color: var(--primary);">play_circle</span>
+                        <span data-es="Tutoriales" data-en="Tutorials">Tutoriales</span>
+                    </h2>
+                    <div class="cards-grid">
                         <div class="card" onclick="window.open('https://asimetrix.notion.site/Base-de-Conocimiento-ec00644a794f4ee08517a676fb688c2a', '_blank')">
                             <div class="card-icon primary">
                                 <span class="material-symbols-outlined">play_circle</span>
                             </div>
-                            <h3>Tutoriales</h3>
-                            <p>Videos y guías para aprender a usar el dashboard y aprovechar todas las funcionalidades.</p>
+                            <h3 data-es="Smart Farm Tutoriales" data-en="Smart Farm Tutorials">Smart Farm Tutoriales</h3>
+                            <p data-es="Videos y guías para aprender a usar los productos Smart Farm." data-en="Videos and guides to learn how to use Smart Farm products.">Videos y guías para aprender a usar los productos Smart Farm.</p>
                             <span class="card-link">
-                                Ver tutoriales
+                                <span data-es="Ver tutoriales" data-en="View tutorials">Ver tutoriales</span>
                                 <span class="material-symbols-outlined">arrow_forward</span>
                             </span>
                         </div>
@@ -635,9 +711,9 @@
         <div id="page-guide" class="page">
             <section class="hero" style="background: var(--surface-container-low);">
                 <div class="container">
-                    <a href="https://asimetrix-hub.vercel.app/" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 1rem;">
+                    <a href="#" onclick="showPage('smartfarm')" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 1rem;">
                         <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-                        <span data-es="Volver al Hub" data-en="Back to Hub">Volver al Hub</span>
+                        <span data-es="Volver a Smart Farm" data-en="Back to Smart Farm">Volver a Smart Farm</span>
                     </a>
                     <h1 style="color: var(--text);" data-es="Guías" data-en="Guides">Guías</h1>
                     <p data-es="Selecciona el producto para ver su guía de instalación, configuración y mantenimiento." data-en="Select the product to view its installation, configuration and maintenance guide.">Selecciona el producto para ver su guía de instalación, configuración y mantenimiento.</p>
@@ -688,11 +764,11 @@
         <div id="page-guide-nodos" class="page">
             <section class="hero" style="background: var(--surface-container-low);">
                 <div class="container">
-                    <a href="https://asimetrix-hub.vercel.app/" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 0.5rem;">
+                    <a href="#" onclick="showPage('smartfarm')" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 0.5rem;">
                         <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-                        Volver al Hub
+                        <span data-es="Volver a Smart Farm" data-en="Back to Smart Farm">Volver a Smart Farm</span>
                     </a>
-                    <p class="breadcrumb"><a href="#" onclick="showPage('guide')">Guías</a> <span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span> Nodos Ambientales</p>
+                    <p class="breadcrumb"><a href="#" onclick="showPage('smartfarm')">Smart Farm</a> <span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span> Nodos Ambientales</p>
                     <h1 style="color: var(--text);">Nodos Ambientales</h1>
                     <p>Selecciona el nodo para ver su guía.</p>
                 </div>
@@ -735,13 +811,46 @@
             </section>
         </div>
 
+        <!-- KNOW PAGE -->
+        <div id="page-know" class="page">
+            <section class="hero">
+                <div class="container">
+                    <span class="section-label"><span class="material-symbols-outlined">monitoring</span> Know</span>
+                    <h1 data-es="Know Platform" data-en="Know Platform">Know Platform</h1>
+                    <p data-es="Tutoriales para navegar, filtrar y analizar tus datos de producción en la plataforma Know." data-en="Tutorials to navigate, filter and analyze your production data on the Know platform.">Tutoriales para navegar, filtrar y analizar tus datos de producción.</p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="container">
+                    <h2 style="font-size: 1.5rem; color: var(--text); margin-bottom: 1.5rem; font-weight: 800;">
+                        <span class="material-symbols-outlined" style="font-size: 24px; vertical-align: middle; margin-right: 0.5rem; color: var(--primary);">play_circle</span>
+                        <span data-es="Tutoriales" data-en="Tutorials">Tutoriales</span>
+                    </h2>
+                    <div class="cards-grid">
+                        <div class="card" onclick="window.open('https://asimetrix.notion.site/Base-de-Conocimiento-ec00644a794f4ee08517a676fb688c2a', '_blank')">
+                            <div class="card-icon accent">
+                                <span class="material-symbols-outlined">dashboard</span>
+                            </div>
+                            <h3 data-es="Tutorial general de Know" data-en="Know General Tutorial">Tutorial general de Know</h3>
+                            <p data-es="Guía paso a paso para navegar, filtrar y analizar tus datos de producción en la plataforma Know." data-en="Step-by-step guide to navigate, filter and analyze your production data on the Know platform.">Guía paso a paso para navegar, filtrar y analizar tus datos de producción.</p>
+                            <span class="card-link">
+                                <span data-es="Ver tutorial" data-en="View tutorial">Ver tutorial</span>
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <!-- KNOWLEDGE PAGE -->
         <div id="page-knowledge" class="page">
             <section class="hero">
                 <div class="container">
-                    <a href="https://asimetrix-hub.vercel.app/" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 1rem;">
+                    <a href="#" onclick="showPage('know')" style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); font-size: 0.875rem; font-weight: 500; text-decoration: none; margin-bottom: 1rem;">
                         <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back</span>
-                        Volver al Hub
+                        <span data-es="Volver a Know" data-en="Back to Know">Volver a Know</span>
                     </a>
                     <br>
                     <span class="section-label"><span class="material-symbols-outlined">school</span> Tutoriales</span>
@@ -790,12 +899,12 @@
                 <p>Monitoreo inteligente para tu producción. Cámaras inteligentes, sensores y herramientas de IA que transforman datos en rentabilidad.</p>
             </div>
             <div>
-                <h4>HUB</h4>
-                <ul>
-                    <li><a href="#" onclick="showPage('guide')">Guías</a></li>
-                    <li><a href="#" onclick="showPage('knowledge')">Tutoriales</a></li>
-                    <li><a href="https://onix.asimetrix.co/" target="_blank">Chatear con Onix</a></li>
-                </ul>
+                    <h4>HUB</h4>
+                    <ul>
+                        <li><a href="#" onclick="showPage('smartfarm')">Smart Farm</a></li>
+                        <li><a href="#" onclick="showPage('know')">Know</a></li>
+                        <li><a href="https://onix.asimetrix.co/" target="_blank">Chatear con Onix</a></li>
+                    </ul>
             </div>
             <div>
                 <h4>Soporte</h4>
@@ -824,8 +933,14 @@
             es: {
                 welcome: "Bienvenido a Asimetrix Hub",
                 centerOfKnowledge: "Tu centro de conocimiento.",
-                description: "Encuentra guías de instalación, configuración, mantenimiento y tutoriales sobre el uso de nuestros productos y herramientas digitales.",
-                howCanWeHelp: "¿En qué te podemos ayudar?",
+                description: "Explora Smart Farm para guías de instalación y tutoriales de productos. Accede a Know para tutoriales de la plataforma de monitoreo.",
+                howCanWeHelp: "Explora nuestras secciones",
+                smartFarm: "Smart Farm",
+                smartFarmDesc: "Guías de instalación y tutoriales para productos como PigVision, Insylo, Nodos Ambientales y Gateway.",
+                goToSmartFarm: "Ir a Smart Farm",
+                know: "Know",
+                knowDesc: "Tutoriales para navegar, filtrar y analizar datos en la plataforma de monitoreo Know.",
+                goToKnow: "Ir a Know",
                 installationGuides: "Guías de Instalación",
                 installationGuidesDesc: "Paso a paso detallado para instalar, configurar y mantener cada uno de nuestros productos.",
                 viewGuides: "Ver guías",
@@ -834,7 +949,7 @@
                 viewTutorials: "Ver tutoriales",
                 guides: "Guías",
                 guidesDesc: "Selecciona el producto para ver su guía de instalación, configuración y mantenimiento.",
-                backToHub: "Volver al Hub",
+                backToSmartFarm: "Volver a Smart Farm",
                 nodosAmbientales: "Nodos Ambientales",
                 nodosAmbientalesDesc: "Sensores de temperatura, humedad y CO2 para monitoreo ambiental.",
                 viewGuide: "Ver guía",
@@ -861,8 +976,14 @@
             en: {
                 welcome: "Welcome to Asimetrix Hub",
                 centerOfKnowledge: "Your knowledge center.",
-                description: "Find installation, configuration, maintenance guides and tutorials on using our products and digital tools.",
-                howCanWeHelp: "How can we help you?",
+                description: "Explore Smart Farm for installation guides and product tutorials. Access Know for monitoring platform tutorials.",
+                howCanWeHelp: "Explore our sections",
+                smartFarm: "Smart Farm",
+                smartFarmDesc: "Installation guides and tutorials for products like PigVision, Insylo, Ambient Nodes and Gateway.",
+                goToSmartFarm: "Go to Smart Farm",
+                know: "Know",
+                knowDesc: "Tutorials to navigate, filter and analyze data on the Know monitoring platform.",
+                goToKnow: "Go to Know",
                 installationGuides: "Installation Guides",
                 installationGuidesDesc: "Step-by-step detailed instructions to install, configure and maintain each of our products.",
                 viewGuides: "View guides",
@@ -871,7 +992,7 @@
                 viewTutorials: "View tutorials",
                 guides: "Guides",
                 guidesDesc: "Select the product to view its installation, configuration and maintenance guide.",
-                backToHub: "Back to Hub",
+                backToSmartFarm: "Back to Smart Farm",
                 nodosAmbientales: "Ambient Nodes",
                 nodosAmbientalesDesc: "Temperature, humidity and CO2 sensors for environmental monitoring.",
                 viewGuide: "View guide",
