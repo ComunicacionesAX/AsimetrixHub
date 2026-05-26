@@ -4,991 +4,910 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insylo — Guía de la plataforma</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js">
-<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
-/* ─── Tokens Asimetrix ─────────────────────────────────────── */
 :root {
-  /* Marca primaria */
-  --ax-brand-primary:        #006084;
-  --ax-brand-primary-hover:  #00547A;
-  --ax-brand-primary-pressed:#00415F;
-  --ax-brand-primary-soft:   #E5EFF3;
+    --primary: #014469;
+    --primary-dark: #001a2e;
+    --primary-light: #9bccf7;
+    --primary-container: #275c82;
+    --accent: #4BA2FF;
+    --accent-aqua: #00E3FF;
+    --accent-aqua-gray: #7EC6DE;
+    --tertiary: #00484f;
+    --tertiary-container: #94f1fc;
+    --text: #181c1d;
+    --text-light: #41474e;
+    --bg: #f6fafb;
+    --surface: #f6fafb;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f0f4f5;
+    --surface-container: #eaeef0;
+    --surface-container-high: #e5e9ea;
+    --surface-container-highest: #dfe3e4;
+    --outline: #72787f;
+    --outline-variant: #c1c7cf;
+    --success: #166534;
+    --success-bg: #dcfce7;
 
-  /* Texto modo claro */
-  --ax-fg-1: #0A0F3D;
-  --ax-fg-2: #4A5566;
-  --ax-fg-3: #6C7878;
-  --ax-fg-disabled: #B4BDC4;
-
-  /* Superficies modo claro */
-  --ax-bg-1: #FFFFFF;
-  --ax-bg-2: #F5F6F8;
-  --ax-bg-3: #ECEEF1;
-  --ax-border: #D8DCE0;
-  --ax-border-strong: #B4BDC4;
-
-  /* Semánticos */
-  --ax-success:       #2E8B57;
-  --ax-success-soft:  #E5F2EB;
-  --ax-warning:       #E0A100;
-  --ax-warning-soft:  #FBF1D6;
-  --ax-danger:        #C62828;
-  --ax-danger-soft:   #FBE5E5;
-  --ax-info:          #006084;
-  --ax-info-soft:     #E5EFF3;
-
-  /* Sombras */
-  --ax-shadow-xs: 0 1px 2px rgba(10,15,61,.06);
-  --ax-shadow-sm: 0 2px 4px rgba(10,15,61,.08);
-  --ax-shadow-md: 0 4px 12px rgba(10,15,61,.10);
-  --ax-shadow-lg: 0 12px 24px rgba(10,15,61,.12);
-
-  /* Movimiento */
-  --ax-ease: cubic-bezier(0.2,0.7,0.2,1);
-  --ax-dur-fast: 120ms;
-  --ax-dur-base: 200ms;
-  --ax-dur-slow: 320ms;
-
-  /* Tipografía */
-  --ax-font: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-  /* Radios */
-  --r-xs: 4px;
-  --r-sm: 6px;
-  --r-md: 8px;
-  --r-lg: 12px;
-  --r-xl: 16px;
-  --r-pill: 999px;
-
-  /* Sidebar */
-  --sidebar-w: 268px;
+    --sidebar-w: 268px;
 }
 
-/* ─── Reset ─────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: var(--ax-font);
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-1);
-  background: var(--ax-bg-2);
-  min-height: 100vh;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    min-height: 100vh;
 }
 
-/* ─── Layout ─────────────────────────────────────────────────── */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
 .layout { display: flex; min-height: 100vh; }
 
 /* ─── Sidebar ────────────────────────────────────────────────── */
 .sidebar {
-  width: var(--sidebar-w);
-  min-height: 100vh;
-  background: var(--ax-bg-1);
-  border-right: 1px solid var(--ax-border);
-  position: fixed;
-  top: 0; left: 0; bottom: 0;
-  overflow-y: auto;
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--ax-shadow-sm);
+    width: var(--sidebar-w);
+    min-height: 100vh;
+    background: var(--surface-container-lowest);
+    border-right: 1px solid var(--outline-variant);
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    overflow-y: auto;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
-/* Marca en sidebar */
 .sidebar-brand {
-  padding: 24px 20px 20px;
-  border-bottom: 1px solid var(--ax-border);
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid var(--outline-variant);
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* Isotipo SVG (8 nodos) */
 .ax-symbol svg { display: block; }
-
 .brand-text { flex: 1; min-width: 0; }
 
 .brand-product {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--ax-brand-primary);
-  line-height: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    line-height: 16px;
 }
 
 .brand-name {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-1);
-  line-height: 23px;
-  margin-top: 1px;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 23px;
+    margin-top: 1px;
 }
 
-/* Progreso */
 .sidebar-progress {
-  padding: 16px 20px 12px;
-  border-bottom: 1px solid var(--ax-border);
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--outline-variant);
 }
 
 .progress-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
 .progress-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--ax-fg-3);
-  letter-spacing: -0.17px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-light);
 }
 
 .progress-pct {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ax-brand-primary);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
 }
 
 .progress-track {
-  height: 4px;
-  background: var(--ax-bg-3);
-  border-radius: var(--r-pill);
-  overflow: hidden;
+    height: 4px;
+    background: var(--surface-container);
+    border-radius: 999px;
+    overflow: hidden;
 }
 
 .progress-fill {
-  height: 100%;
-  background: var(--ax-brand-primary);
-  border-radius: var(--r-pill);
-  transition: width var(--ax-dur-slow) var(--ax-ease);
-  width: 0%;
+    height: 100%;
+    background: var(--primary);
+    border-radius: 999px;
+    transition: width 0.3s ease;
+    width: 0%;
 }
 
-/* Nav */
 .sidebar-nav { flex: 1; padding: 8px 0 24px; }
 
 .nav-group-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--ax-fg-3);
-  padding: 16px 20px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    padding: 16px 20px 6px;
 }
 
 .nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 20px;
-  cursor: pointer;
-  color: var(--ax-fg-2);
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: -0.2px;
-  line-height: 18px;
-  border-left: 3px solid transparent;
-  transition: background var(--ax-dur-fast) var(--ax-ease),
-              color var(--ax-dur-fast) var(--ax-ease);
-  position: relative;
-  user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    color: var(--text-light);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    border-left: 3px solid transparent;
+    transition: background 0.12s ease, color 0.12s ease;
+    position: relative;
+    user-select: none;
 }
 
 .nav-item:hover {
-  background: var(--ax-bg-2);
-  color: var(--ax-fg-1);
+    background: var(--surface-container-low);
+    color: var(--text);
 }
 
 .nav-item.active {
-  border-left-color: var(--ax-brand-primary);
-  background: var(--ax-brand-primary-soft);
-  color: var(--ax-brand-primary);
-  font-weight: 600;
+    border-left-color: var(--primary);
+    background: rgba(1, 68, 105, 0.1);
+    color: var(--primary);
+    font-weight: 600;
 }
 
-.nav-item.done {
-  color: var(--ax-success);
-}
-
-.nav-item.done .nav-check {
-  display: flex;
-}
+.nav-item.done { color: var(--success); }
+.nav-item.done .nav-check { display: flex; }
 
 .nav-check {
-  display: none;
-  position: absolute;
-  right: 16px;
-  color: var(--ax-success);
+    display: none;
+    position: absolute;
+    right: 16px;
+    color: var(--success);
 }
 
 .nav-num {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--ax-fg-disabled);
-  width: 22px;
-  flex-shrink: 0;
-  letter-spacing: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--outline);
+    width: 22px;
+    flex-shrink: 0;
 }
 
-.nav-item.active .nav-num { color: var(--ax-brand-primary); }
-.nav-item.done .nav-num { color: var(--ax-success); }
+.nav-item.active .nav-num { color: var(--primary); }
+.nav-item.done .nav-num { color: var(--success); }
 
 .nav-icon {
-  display: flex;
-  align-items: center;
-  color: inherit;
-  flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    color: inherit;
+    flex-shrink: 0;
 }
 
 /* ─── Main ────────────────────────────────────────────────────── */
 .main {
-  margin-left: var(--sidebar-w);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+    margin-left: var(--sidebar-w);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-/* ─── Sections ───────────────────────────────────────────────── */
 .section {
-  display: none;
-  flex: 1;
-  animation: ax-fade-up var(--ax-dur-slow) var(--ax-ease) both;
+    display: none;
+    flex: 1;
+    animation: fadeUp 0.32s ease both;
 }
 .section.active { display: flex; flex-direction: column; }
 
-@keyframes ax-fade-up {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ─── Hero (section 0) ───────────────────────────────────────── */
+/* ─── Hero ────────────────────────────────────────────────────── */
 .hero {
-  background: var(--ax-bg-1);
-  border-bottom: 1px solid var(--ax-border);
-  padding: 64px 64px 48px;
-  position: relative;
-  overflow: hidden;
+    background: var(--surface-container-lowest);
+    border-bottom: 1px solid var(--outline-variant);
+    padding: 64px 64px 48px;
+    position: relative;
+    overflow: hidden;
 }
 
 .hero::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 320px; height: 100%;
-  background: linear-gradient(135deg, var(--ax-brand-primary-soft) 0%, transparent 60%);
-  pointer-events: none;
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 320px; height: 100%;
+    background: linear-gradient(135deg, rgba(1,68,105,0.06) 0%, transparent 60%);
+    pointer-events: none;
 }
 
 .hero-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--ax-brand-primary);
-  margin-bottom: 16px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 16px;
 }
 
 .hero h1 {
-  font-size: 48px;
-  font-weight: 700;
-  letter-spacing: -0.8px;
-  line-height: 1.05;
-  color: var(--ax-fg-1);
-  max-width: 560px;
-  margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: var(--text);
+    max-width: 560px;
+    margin-bottom: 20px;
 }
 
 .hero-sub {
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-2);
-  max-width: 480px;
-  margin-bottom: 40px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    max-width: 480px;
+    margin-bottom: 40px;
 }
 
 .hero-stats {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
 }
 
 .hero-stat-num {
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: -0.6px;
-  color: var(--ax-brand-primary);
-  line-height: 1;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--primary);
+    line-height: 1;
 }
 
 .hero-stat-label {
-  font-size: 13px;
-  color: var(--ax-fg-3);
-  margin-top: 4px;
-  letter-spacing: -0.17px;
+    font-size: 0.8125rem;
+    color: var(--text-light);
+    margin-top: 4px;
 }
 
 /* ─── Section body ───────────────────────────────────────────── */
 .section-body {
-  padding: 48px 64px 0;
-  flex: 1;
+    padding: 48px 64px 0;
+    flex: 1;
 }
 
 .section-header {
-  margin-bottom: 40px;
-  padding-bottom: 32px;
-  border-bottom: 1px solid var(--ax-border);
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--outline-variant);
 }
 
 .section-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--ax-brand-primary);
-  margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 8px;
 }
 
 .section-title {
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: -0.6px;
-  line-height: 32px;
-  color: var(--ax-fg-1);
-  margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 10px;
 }
 
 .section-desc {
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-2);
-  max-width: 520px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    max-width: 520px;
 }
 
 /* ─── Cards ──────────────────────────────────────────────────── */
 .card-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
 .card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
 .card-grid.cols-1 { grid-template-columns: 1fr; }
 
 .card {
-  background: var(--ax-bg-1);
-  border: 1px solid var(--ax-border);
-  border-radius: var(--r-lg);
-  padding: 24px;
-  box-shadow: var(--ax-shadow-xs);
-  transition: box-shadow var(--ax-dur-base) var(--ax-ease),
-              border-color var(--ax-dur-base) var(--ax-ease);
+    background: var(--surface-container-lowest);
+    border: 1px solid rgba(114, 120, 127, 0.08);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .card:hover {
-  box-shadow: var(--ax-shadow-md);
-  border-color: var(--ax-border-strong);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-color: rgba(114, 120, 127, 0.15);
 }
 
 .card-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--r-md);
-  background: var(--ax-brand-primary-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ax-brand-primary);
-  margin-bottom: 16px;
+    background: rgba(1, 68, 105, 0.1);
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    margin-bottom: 1rem;
 }
 
+.card-icon .material-symbols-outlined { font-size: 20px; }
+
 .card-title {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  color: var(--ax-fg-1);
-  margin-bottom: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
 }
 
 .card-body {
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.2px;
-  color: var(--ax-fg-2);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-light);
 }
 
-/* Variante elevada (hero intro) */
-.card.elevated {
-  box-shadow: var(--ax-shadow-sm);
-}
+.card.elevated { box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
 
 /* ─── Callouts ───────────────────────────────────────────────── */
 .callout {
-  display: flex;
-  gap: 12px;
-  padding: 14px 16px;
-  border-radius: var(--r-lg);
-  border: 1px solid;
-  margin-bottom: 20px;
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.2px;
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 0.75rem;
+    border: 1px solid;
+    margin-bottom: 20px;
+    font-size: 0.875rem;
+    line-height: 1.6;
 }
 
-.callout.info    { background: var(--ax-info-soft);    border-color: rgba(0,96,132,.2);  color: var(--ax-fg-1); }
-.callout.success { background: var(--ax-success-soft); border-color: rgba(46,139,87,.2); color: var(--ax-fg-1); }
-.callout.warning { background: var(--ax-warning-soft); border-color: rgba(224,161,0,.2); color: var(--ax-fg-1); }
-.callout.danger  { background: var(--ax-danger-soft);  border-color: rgba(198,40,40,.2); color: var(--ax-fg-1); }
+.callout.info    { background: rgba(1, 68, 105, 0.06); border-color: rgba(1,68,105,.15); color: var(--text); }
+.callout.success { background: #dcfce7; border-color: rgba(22,101,52,.2); color: var(--text); }
+.callout.warning { background: #fef3c7; border-color: rgba(217,119,6,.2); color: var(--text); }
+.callout.danger  { background: #fee2e2; border-color: rgba(220,38,38,.2); color: var(--text); }
 
-.callout-icon {
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.callout.info    .callout-icon { color: var(--ax-brand-primary); }
-.callout.success .callout-icon { color: var(--ax-success); }
-.callout.warning .callout-icon { color: var(--ax-warning); }
-.callout.danger  .callout-icon { color: var(--ax-danger); }
+.callout-icon { flex-shrink: 0; margin-top: 1px; }
+.callout.info    .callout-icon { color: var(--primary); }
+.callout.success .callout-icon { color: var(--success); }
+.callout.warning .callout-icon { color: #d97706; }
+.callout.danger  .callout-icon { color: #dc2626; }
 
 .callout-content strong {
-  display: block;
-  font-weight: 600;
-  font-size: 13px;
-  margin-bottom: 4px;
-  color: var(--ax-fg-1);
+    display: block;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    margin-bottom: 4px;
+    color: var(--text);
 }
 
 /* ─── Steps ──────────────────────────────────────────────────── */
 .steps { margin-bottom: 32px; }
 
 .step {
-  display: flex;
-  gap: 16px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--ax-border);
-  align-items: flex-start;
+    display: flex;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--outline-variant);
+    align-items: flex-start;
 }
 
 .step:last-child { border-bottom: none; }
 
 .step-num {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--ax-brand-primary-soft);
-  border: 1.5px solid rgba(0,96,132,.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--ax-brand-primary);
-  flex-shrink: 0;
-  margin-top: 2px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(1, 68, 105, 0.1);
+    border: 1.5px solid rgba(1,68,105,.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 2px;
 }
 
 .step-title {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  color: var(--ax-fg-1);
-  margin-bottom: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
 }
 
 .step-body {
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.2px;
-  color: var(--ax-fg-2);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-light);
 }
 
 /* ─── Tables ─────────────────────────────────────────────────── */
 .ax-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--ax-bg-1);
-  border: 1px solid var(--ax-border);
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  font-size: 14px;
-  margin-bottom: 24px;
-  box-shadow: var(--ax-shadow-xs);
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .ax-table th {
-  background: var(--ax-bg-3);
-  padding: 10px 16px;
-  text-align: left;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--ax-fg-3);
-  border-bottom: 1px solid var(--ax-border);
+    background: var(--surface-container);
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    border-bottom: 1px solid var(--outline-variant);
 }
 
 .ax-table td {
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--ax-border);
-  color: var(--ax-fg-1);
-  vertical-align: top;
-  line-height: 18px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--outline-variant);
+    color: var(--text);
+    vertical-align: top;
+    line-height: 1.6;
 }
 
 .ax-table tr:last-child td { border-bottom: none; }
+.ax-table tr:hover td { background: var(--surface-container-low); }
 
-.ax-table tr:hover td { background: var(--ax-bg-2); }
-
-/* ─── Pills / badges ─────────────────────────────────────────── */
+/* ─── Pills ──────────────────────────────────────────────────── */
 .pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 10px;
-  border-radius: var(--r-pill);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -0.17px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .pill-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
 }
 
-.pill.success { background: var(--ax-success-soft); color: var(--ax-success); }
-.pill.success .pill-dot { background: var(--ax-success); }
-.pill.warning { background: var(--ax-warning-soft); color: var(--ax-warning); }
-.pill.warning .pill-dot { background: var(--ax-warning); }
-.pill.info    { background: var(--ax-info-soft);    color: var(--ax-brand-primary); }
-.pill.info    .pill-dot { background: var(--ax-brand-primary); }
-.pill.neutral { background: var(--ax-bg-3); color: var(--ax-fg-2); }
-.pill.neutral .pill-dot { background: var(--ax-fg-3); }
+.pill.success { background: #dcfce7; color: var(--success); }
+.pill.success .pill-dot { background: var(--success); }
+.pill.warning { background: #fef3c7; color: #d97706; }
+.pill.warning .pill-dot { background: #d97706; }
+.pill.info    { background: rgba(1, 68, 105, 0.1); color: var(--primary); }
+.pill.info    .pill-dot { background: var(--primary); }
+.pill.neutral { background: var(--surface-container); color: var(--text-light); }
+.pill.neutral .pill-dot { background: var(--outline); }
 
-/* ─── Silo diagram card ──────────────────────────────────────── */
+/* ─── Silo diagram ───────────────────────────────────────────── */
 .silo-visual {
-  background: var(--ax-bg-1);
-  border: 1px solid var(--ax-border);
-  border-radius: var(--r-lg);
-  padding: 32px;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: flex-start;
-  gap: 48px;
-  box-shadow: var(--ax-shadow-sm);
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 1rem;
+    padding: 32px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 48px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .silo-wrap { flex-shrink: 0; width: 110px; }
 
 .legend-title {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-1);
-  margin-bottom: 20px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 20px;
 }
 
 .legend-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--ax-border);
-  font-size: 13px;
-  line-height: 18px;
-  color: var(--ax-fg-2);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--outline-variant);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--text-light);
 }
 
 .legend-item:last-child { border-bottom: none; }
 
 .legend-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  margin-top: 5px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
 }
 
-.legend-item strong { color: var(--ax-fg-1); font-weight: 600; }
+.legend-item strong { color: var(--text); font-weight: 600; }
 
 /* ─── Density calculator ─────────────────────────────────────── */
 .density-calc {
-  background: var(--ax-bg-1);
-  border: 1px solid var(--ax-border);
-  border-radius: var(--r-lg);
-  padding: 28px;
-  margin-bottom: 24px;
-  box-shadow: var(--ax-shadow-sm);
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 1rem;
+    padding: 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .calc-title {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-1);
-  margin-bottom: 6px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 6px;
 }
 
 .calc-sub {
-  font-size: 14px;
-  color: var(--ax-fg-3);
-  margin-bottom: 24px;
-  letter-spacing: -0.2px;
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-bottom: 24px;
 }
 
 .calc-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .calc-field { display: flex; flex-direction: column; gap: 6px; }
 
 .calc-field label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--ax-fg-3);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
 }
 
 .calc-field input {
-  background: var(--ax-bg-3);
-  border: 1px solid var(--ax-border);
-  border-radius: var(--r-sm);
-  padding: 9px 12px;
-  font-family: var(--ax-font);
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-1);
-  text-align: center;
-  width: 100%;
-  outline: none;
-  transition: border-color var(--ax-dur-fast) var(--ax-ease),
-              box-shadow var(--ax-dur-fast) var(--ax-ease);
+    background: var(--surface-container);
+    border: 1px solid var(--outline-variant);
+    border-radius: 6px;
+    padding: 9px 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease;
 }
 
 .calc-field input:focus {
-  border-color: var(--ax-brand-primary);
-  box-shadow: 0 0 0 2px rgba(0,96,132,.15);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(1, 68, 105, 0.15);
 }
 
-.calc-field input::placeholder { color: var(--ax-fg-disabled); font-weight: 400; }
+.calc-field input::placeholder { color: var(--outline); font-weight: 400; }
 
 .calc-result {
-  background: var(--ax-brand-primary-soft);
-  border: 1px solid rgba(0,96,132,.2);
-  border-radius: var(--r-md);
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    background: rgba(1, 68, 105, 0.06);
+    border: 1px solid rgba(1,68,105,.15);
+    border-radius: 8px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .calc-result-left { flex: 1; }
 
 .calc-result-label {
-  font-size: 13px;
-  color: var(--ax-fg-2);
-  margin-bottom: 2px;
+    font-size: 0.8125rem;
+    color: var(--text-light);
+    margin-bottom: 2px;
 }
 
 .calc-result-unit {
-  font-size: 11px;
-  color: var(--ax-fg-3);
+    font-size: 11px;
+    color: var(--text-light);
 }
 
 .calc-result-val {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.45px;
-  color: var(--ax-brand-primary);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--primary);
 }
 
 /* ─── Quiz ───────────────────────────────────────────────────── */
 .quiz-card {
-  background: var(--ax-bg-1);
-  border: 1px solid var(--ax-border);
-  border-radius: var(--r-lg);
-  padding: 24px;
-  margin-bottom: 20px;
-  box-shadow: var(--ax-shadow-xs);
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 
 .quiz-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.8px;
-  text-transform: uppercase;
-  color: var(--ax-brand-primary);
-  margin-bottom: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 10px;
 }
 
 .quiz-q {
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-1);
-  margin-bottom: 16px;
-  line-height: 20px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.5;
 }
 
 .quiz-options { display: flex; flex-direction: column; gap: 8px; }
 
 .quiz-option {
-  padding: 11px 16px;
-  background: var(--ax-bg-2);
-  border: 1.5px solid var(--ax-border);
-  border-radius: var(--r-md);
-  cursor: pointer;
-  color: var(--ax-fg-2);
-  font-family: var(--ax-font);
-  font-size: 14px;
-  letter-spacing: -0.2px;
-  text-align: left;
-  transition: border-color var(--ax-dur-fast) var(--ax-ease),
-              background var(--ax-dur-fast) var(--ax-ease),
-              color var(--ax-dur-fast) var(--ax-ease);
+    padding: 11px 16px;
+    background: var(--surface-container-low);
+    border: 1.5px solid var(--outline-variant);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-light);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    text-align: left;
+    transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
 }
 
 .quiz-option:hover:not(:disabled) {
-  border-color: var(--ax-brand-primary);
-  background: var(--ax-brand-primary-soft);
-  color: var(--ax-fg-1);
+    border-color: var(--primary);
+    background: rgba(1, 68, 105, 0.06);
+    color: var(--text);
 }
 
 .quiz-option:active:not(:disabled) { transform: scale(0.98); }
 
 .quiz-option.correct {
-  background: var(--ax-success-soft);
-  border-color: var(--ax-success);
-  color: var(--ax-success);
-  font-weight: 600;
+    background: #dcfce7;
+    border-color: var(--success);
+    color: var(--success);
+    font-weight: 600;
 }
 
 .quiz-option.incorrect {
-  background: var(--ax-danger-soft);
-  border-color: var(--ax-danger);
-  color: var(--ax-danger);
+    background: #fee2e2;
+    border-color: #dc2626;
+    color: #dc2626;
 }
 
 .quiz-option:disabled { cursor: default; }
 
 .quiz-feedback {
-  margin-top: 12px;
-  padding: 10px 14px;
-  border-radius: var(--r-md);
-  font-size: 13px;
-  letter-spacing: -0.17px;
-  display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.8125rem;
+    display: none;
 }
 
 .quiz-feedback.show { display: block; }
-.quiz-feedback.ok   { background: var(--ax-success-soft); border: 1px solid rgba(46,139,87,.2); color: var(--ax-success); }
-.quiz-feedback.fail { background: var(--ax-danger-soft);  border: 1px solid rgba(198,40,40,.2); color: var(--ax-danger); }
+.quiz-feedback.ok   { background: #dcfce7; border: 1px solid rgba(22,101,52,.2); color: var(--success); }
+.quiz-feedback.fail { background: #fee2e2; border: 1px solid rgba(220,38,38,.2); color: #dc2626; }
 
 /* ─── Buttons ────────────────────────────────────────────────── */
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: var(--r-md);
-  border: none;
-  font-family: var(--ax-font);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-  cursor: pointer;
-  transition: background var(--ax-dur-fast) var(--ax-ease),
-              box-shadow var(--ax-dur-fast) var(--ax-ease),
-              transform var(--ax-dur-fast) var(--ax-ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
 }
 
 .btn:active { transform: scale(0.98); }
 .btn:disabled { opacity: 0.38; cursor: not-allowed; transform: none; }
 
 .btn-primary {
-  background: var(--ax-brand-primary);
-  color: #fff;
+    background: var(--primary);
+    color: #fff;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: var(--ax-brand-primary-hover);
-  box-shadow: var(--ax-shadow-md);
+    background: #013351;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.btn-primary:active:not(:disabled) { background: var(--ax-brand-primary-pressed); }
-
 .btn-secondary {
-  background: transparent;
-  color: var(--ax-brand-primary);
-  border: 1.5px solid var(--ax-brand-primary);
+    background: transparent;
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background: var(--ax-brand-primary-soft);
+    background: rgba(1, 68, 105, 0.06);
 }
 
 /* ─── Nav footer ─────────────────────────────────────────────── */
 .section-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 32px 64px 64px;
-  margin-top: 48px;
-  border-top: 1px solid var(--ax-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 64px 64px;
+    margin-top: 48px;
+    border-top: 1px solid var(--outline-variant);
 }
 
-/* ─── Good practices list ────────────────────────────────────── */
+/* ─── Practices ──────────────────────────────────────────────── */
 .practices-list {
-  background: var(--ax-bg-1);
-  border: 1px solid var(--ax-border);
-  border-radius: var(--r-lg);
-  padding: 28px;
-  box-shadow: var(--ax-shadow-sm);
-  margin-bottom: 24px;
+    background: var(--surface-container-lowest);
+    border: 1px solid var(--outline-variant);
+    border-radius: 1rem;
+    padding: 28px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    margin-bottom: 24px;
 }
 
 .practices-title {
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.3px;
-  color: var(--ax-fg-1);
-  margin-bottom: 20px;
+    font-size: 1.125rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 20px;
 }
 
 .practice-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--ax-border);
-  font-size: 14px;
-  line-height: 18px;
-  letter-spacing: -0.2px;
-  color: var(--ax-fg-2);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--outline-variant);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-light);
 }
 
 .practice-item:last-child { border-bottom: none; }
 
-.practice-icon {
-  color: var(--ax-success);
-  flex-shrink: 0;
-  margin-top: 1px;
-}
+.practice-icon { color: var(--success); flex-shrink: 0; margin-top: 1px; }
+.practice-item strong { color: var(--text); font-weight: 600; }
 
-.practice-item strong { color: var(--ax-fg-1); font-weight: 600; }
-
-/* ─── Completion state ───────────────────────────────────────── */
+/* ─── Completion ─────────────────────────────────────────────── */
 .completion-card {
-  background: var(--ax-success-soft);
-  border: 1px solid rgba(46,139,87,.2);
-  border-radius: var(--r-xl);
-  padding: 40px;
-  text-align: center;
-  margin-top: 8px;
-  margin-bottom: 24px;
+    background: #dcfce7;
+    border: 1px solid rgba(22,101,52,.2);
+    border-radius: 1rem;
+    padding: 40px;
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 24px;
 }
 
 .completion-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--ax-success);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  color: white;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
 }
 
 .completion-title {
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.45px;
-  color: var(--ax-fg-1);
-  margin-bottom: 8px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 8px;
 }
 
 .completion-desc {
-  font-size: 14px;
-  color: var(--ax-fg-2);
-  max-width: 380px;
-  margin: 0 auto;
-  line-height: 18px;
+    font-size: 0.875rem;
+    color: var(--text-light);
+    max-width: 380px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 /* ─── Mobile ─────────────────────────────────────────────────── */
 .mobile-toggle {
-  display: none;
-  position: fixed;
-  bottom: 20px; right: 20px;
-  width: 48px; height: 48px;
-  background: var(--ax-brand-primary);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 300;
-  box-shadow: var(--ax-shadow-lg);
-  transition: background var(--ax-dur-fast) var(--ax-ease);
+    display: none;
+    position: fixed;
+    bottom: 20px; right: 20px;
+    width: 48px; height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 300;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    transition: background 0.12s ease;
 }
 
-.mobile-toggle:hover { background: var(--ax-brand-primary-hover); }
+.mobile-toggle:hover { background: #013351; }
 
 .mobile-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(10,15,61,.4);
-  z-index: 150;
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 150;
 }
 
 @media (max-width: 900px) {
-  :root { --sidebar-w: 0px; }
+    :root { --sidebar-w: 0px; }
 
-  .sidebar {
-    transform: translateX(-268px);
-    width: 268px;
-    transition: transform var(--ax-dur-slow) var(--ax-ease);
-  }
+    .sidebar {
+        transform: translateX(-268px);
+        width: 268px;
+        transition: transform 0.32s ease;
+    }
 
-  .sidebar.open { transform: translateX(0); }
-
-  .main { margin-left: 0; }
-
-  .hero, .section-body { padding-left: 24px; padding-right: 24px; }
-
-  .hero h1 { font-size: 32px; }
-
-  .card-grid { grid-template-columns: 1fr; }
-  .card-grid.cols-3 { grid-template-columns: 1fr 1fr; }
-
-  .section-nav { padding: 32px 24px 48px; }
-
-  .silo-visual { flex-direction: column; }
-
-  .calc-grid { grid-template-columns: repeat(3, 1fr); }
-
-  .mobile-toggle { display: flex; }
-
-  .mobile-overlay.open { display: block; }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .hero, .section-body { padding-left: 24px; padding-right: 24px; }
+    .hero h1 { font-size: 2rem; }
+    .card-grid { grid-template-columns: 1fr; }
+    .card-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+    .section-nav { padding: 32px 24px 48px; }
+    .silo-visual { flex-direction: column; }
+    .calc-grid { grid-template-columns: repeat(3, 1fr); }
+    .mobile-toggle { display: flex; }
+    .mobile-overlay.open { display: block; }
 }
 </style>
 </head>
@@ -1004,24 +923,24 @@ body {
     <div class="ax-symbol">
       <!-- Isotipo: 8 nodos alrededor de nodo central -->
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-        <circle cx="18" cy="18" r="3.5" fill="#006084"/>
+        <circle cx="18" cy="18" r="3.5" fill="#014469"/>
         <!-- Nodos perimetrales y radios -->
-        <line x1="18" y1="18" x2="18" y2="5"  stroke="#006084" stroke-width="1.2"/>
-        <line x1="18" y1="18" x2="28.5" y2="9.5" stroke="#006084" stroke-width="1.2"/>
-        <line x1="18" y1="18" x2="31" y2="18" stroke="#006084" stroke-width="1.2"/>
-        <line x1="18" y1="18" x2="28.5" y2="26.5" stroke="#006084" stroke-width="1.2"/>
-        <line x1="18" y1="18" x2="18" y2="31" stroke="#006084" stroke-width="1.2"/>
-        <line x1="18" y1="18" x2="7.5"  y2="26.5" stroke="#006084" stroke-width="1.2"/>
-        <line x1="18" y1="18" x2="5"  y2="18"  stroke="#006084" stroke-width="1.2"/>
-        <line x1="18" y1="18" x2="7.5"  y2="9.5" stroke="#006084" stroke-width="1.2"/>
-        <circle cx="18" cy="5"    r="2.5" fill="#006084"/>
-        <circle cx="28.5" cy="9.5"  r="2.5" fill="#006084"/>
-        <circle cx="31"   cy="18"   r="2.5" fill="#006084"/>
-        <circle cx="28.5" cy="26.5" r="2.5" fill="#006084"/>
-        <circle cx="18"   cy="31"   r="2.5" fill="#006084"/>
-        <circle cx="7.5"  cy="26.5" r="2.5" fill="#006084"/>
-        <circle cx="5"    cy="18"   r="2.5" fill="#006084"/>
-        <circle cx="7.5"  cy="9.5"  r="2.5" fill="#006084"/>
+        <line x1="18" y1="18" x2="18" y2="5"  stroke="#014469" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="28.5" y2="9.5" stroke="#014469" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="31" y2="18" stroke="#014469" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="28.5" y2="26.5" stroke="#014469" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="18" y2="31" stroke="#014469" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="7.5"  y2="26.5" stroke="#014469" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="5"  y2="18"  stroke="#014469" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="7.5"  y2="9.5" stroke="#014469" stroke-width="1.2"/>
+        <circle cx="18" cy="5"    r="2.5" fill="#014469"/>
+        <circle cx="28.5" cy="9.5"  r="2.5" fill="#014469"/>
+        <circle cx="31"   cy="18"   r="2.5" fill="#014469"/>
+        <circle cx="28.5" cy="26.5" r="2.5" fill="#014469"/>
+        <circle cx="18"   cy="31"   r="2.5" fill="#014469"/>
+        <circle cx="7.5"  cy="26.5" r="2.5" fill="#014469"/>
+        <circle cx="5"    cy="18"   r="2.5" fill="#014469"/>
+        <circle cx="7.5"  cy="9.5"  r="2.5" fill="#014469"/>
       </svg>
     </div>
     <div class="brand-text">
@@ -1046,45 +965,45 @@ body {
     <div class="nav-group-label">Contenido</div>
     <div class="nav-item active" data-s="0" onclick="goTo(0)">
       <span class="nav-num">00</span>
-      <span class="nav-icon" data-lucide="layout-dashboard" style="width:14px;height:14px;"></span>
+      <span class="material-symbols-outlined nav-icon" style="font-size: 14px;">dashboard</span>
       Introducción
-      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+      <span class="material-symbols-outlined nav-check" style="font-size: 13px;">check</span>
     </div>
     <div class="nav-item" data-s="1" onclick="goTo(1)">
       <span class="nav-num">01</span>
-      <span class="nav-icon" data-lucide="log-in" style="width:14px;height:14px;"></span>
+      <span class="material-symbols-outlined nav-icon" style="font-size: 14px;">login</span>
       Acceso a la plataforma
-      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+      <span class="material-symbols-outlined nav-check" style="font-size: 13px;">check</span>
     </div>
     <div class="nav-item" data-s="2" onclick="goTo(2)">
       <span class="nav-num">02</span>
-      <span class="nav-icon" data-lucide="bar-chart-2" style="width:14px;height:14px;"></span>
+      <span class="material-symbols-outlined nav-icon" style="font-size: 14px;">bar_chart</span>
       Panel principal
-      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+      <span class="material-symbols-outlined nav-check" style="font-size: 13px;">check</span>
     </div>
     <div class="nav-item" data-s="3" onclick="goTo(3)">
       <span class="nav-num">03</span>
-      <span class="nav-icon" data-lucide="camera" style="width:14px;height:14px;"></span>
+      <span class="material-symbols-outlined nav-icon" style="font-size: 14px;">camera_alt</span>
       Vista interna del silo
-      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+      <span class="material-symbols-outlined nav-check" style="font-size: 13px;">check</span>
     </div>
     <div class="nav-item" data-s="4" onclick="goTo(4)">
       <span class="nav-num">04</span>
-      <span class="nav-icon" data-lucide="sliders" style="width:14px;height:14px;"></span>
+      <span class="material-symbols-outlined nav-icon" style="font-size: 14px;">tune</span>
       Calibración y densidad
-      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+      <span class="material-symbols-outlined nav-check" style="font-size: 13px;">check</span>
     </div>
     <div class="nav-item" data-s="5" onclick="goTo(5)">
       <span class="nav-num">05</span>
-      <span class="nav-icon" data-lucide="clipboard-list" style="width:14px;height:14px;"></span>
+      <span class="material-symbols-outlined nav-icon" style="font-size: 14px;">clipboard</span>
       Recetas y dietas
-      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+      <span class="material-symbols-outlined nav-check" style="font-size: 13px;">check</span>
     </div>
     <div class="nav-item" data-s="6" onclick="goTo(6)">
       <span class="nav-num">06</span>
-      <span class="nav-icon" data-lucide="trending-down" style="width:14px;height:14px;"></span>
+      <span class="material-symbols-outlined nav-icon" style="font-size: 14px;">trending_down</span>
       Consumo y buenas prácticas
-      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+      <span class="material-symbols-outlined nav-check" style="font-size: 13px;">check</span>
     </div>
   </nav>
 </aside>
@@ -1120,24 +1039,24 @@ body {
   <div class="section-body">
     <div class="card-grid cols-3" style="margin-top:8px;">
       <div class="card elevated">
-        <div class="card-icon"><i data-lucide="wifi" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">wifi</span></div>
         <div class="card-title">Qué es Insylo</div>
         <div class="card-body">Una plataforma IoT que instala sensores en tus silos para medir el nivel de alimento automáticamente cada hora, sin intervención manual.</div>
       </div>
       <div class="card elevated">
-        <div class="card-icon"><i data-lucide="target" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">track_changes</span></div>
         <div class="card-title">Para qué sirve</div>
         <div class="card-body">Saber en tiempo real cuánto alimento tienes, cuándo hacer el pedido, detectar problemas de calidad y calcular el consumo real por día.</div>
       </div>
       <div class="card elevated">
-        <div class="card-icon"><i data-lucide="smartphone" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">smartphone</span></div>
         <div class="card-title">Desde dónde accedes</div>
         <div class="card-body">Desde el celular o el computador, en el navegador. No necesitas instalar ninguna aplicación. Dirección: <strong>app.insylo.io</strong></div>
       </div>
     </div>
 
     <div class="callout info">
-      <span class="callout-icon"><i data-lucide="info" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">info</span></span>
       <div class="callout-content">
         <strong>Quién debería usar esta guía</strong>
         Cualquier persona de granja que haga pedidos de alimento, y el personal de planta que quiera revisar inventarios de forma remota.
@@ -1149,7 +1068,7 @@ body {
     <span></span>
     <button class="btn btn-primary" onclick="goTo(1)">
       Comenzar
-      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
     </button>
   </div>
 </div>
@@ -1195,7 +1114,7 @@ body {
     </div>
 
     <div class="callout warning">
-      <span class="callout-icon"><i data-lucide="alert-triangle" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">warning</span></span>
       <div class="callout-content">
         <strong>Si tienes varias granjas</strong>
         Una sola cuenta puede tener acceso a múltiples granjas. Todas aparecen en el panel principal al iniciar sesión.
@@ -1205,12 +1124,12 @@ body {
 
   <div class="section-nav">
     <button class="btn btn-secondary" onclick="goTo(0)">
-      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_back</span>
       Anterior
     </button>
     <button class="btn btn-primary" onclick="goTo(2)">
       Panel principal
-      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
     </button>
   </div>
 </div>
@@ -1232,13 +1151,13 @@ body {
           <!-- cuerpo silo -->
           <rect x="18" y="33" width="64" height="120" rx="3" fill="#F5F6F8" stroke="#D8DCE0" stroke-width="1.5"/>
           <!-- alimento (70%) -->
-          <rect x="19" y="69" width="62" height="83" fill="#E5EFF3" rx="1"/>
+          <rect x="19" y="69" width="62" height="83" fill="#dce8ed" rx="1"/>
           <!-- línea 90% -->
           <line x1="17" y1="57" x2="83" y2="57" stroke="#2E8B57" stroke-width="1" stroke-dasharray="4,3"/>
           <text x="85" y="60" font-family="SF Pro Display,Roboto,Helvetica,sans-serif" font-size="7" fill="#2E8B57" font-weight="600">90%</text>
           <!-- sensor -->
-          <circle cx="50" cy="18" r="5" fill="#006084" stroke="#fff" stroke-width="1.5"/>
-          <line x1="50" y1="23" x2="50" y2="60" stroke="#006084" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
+          <circle cx="50" cy="18" r="5" fill="#014469" stroke="#fff" stroke-width="1.5"/>
+          <line x1="50" y1="23" x2="50" y2="60" stroke="#014469" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
           <!-- patas -->
           <line x1="32" y1="153" x2="27" y2="178" stroke="#B4BDC4" stroke-width="2" stroke-linecap="round"/>
           <line x1="50" y1="153" x2="50" y2="178" stroke="#B4BDC4" stroke-width="2" stroke-linecap="round"/>
@@ -1250,11 +1169,11 @@ body {
       <div style="flex:1;">
         <div class="legend-title">Indicadores del panel</div>
         <div class="legend-item">
-          <div class="legend-dot" style="background:#006084;"></div>
+          <div class="legend-dot" style="background:#014469;"></div>
           <div><strong>Sensor</strong> — toma 1 fotografía por hora, 24 veces al día</div>
         </div>
         <div class="legend-item">
-          <div class="legend-dot" style="background:#E5EFF3;border:1.5px solid #006084;"></div>
+          <div class="legend-dot" style="background:#dce8ed;border:1.5px solid #014469;"></div>
           <div><strong>Nivel de alimento</strong> — toneladas actuales estimadas en el silo</div>
         </div>
         <div class="legend-item">
@@ -1306,7 +1225,7 @@ body {
     </table>
 
     <div class="callout info">
-      <span class="callout-icon"><i data-lucide="calendar" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">calendar_month</span></span>
       <div class="callout-content">
         <strong>Rutina semanal recomendada</strong>
         Entra al panel todos los lunes en la mañana, revisa el inventario de cada silo y decide los pedidos de la semana con base en las toneladas disponibles y los días de inventario.
@@ -1314,7 +1233,7 @@ body {
     </div>
 
     <div class="callout info">
-      <span class="callout-icon"><i data-lucide="download-cloud" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">cloud_download</span></span>
       <div class="callout-content">
         <strong>Exportar a Excel</strong>
         En la parte superior derecha del panel hay un ícono de descarga. Al hacer clic, obtienes un Excel con los datos actuales de todos los silos. Esta función está disponible solo desde el computador.
@@ -1324,12 +1243,12 @@ body {
 
   <div class="section-nav">
     <button class="btn btn-secondary" onclick="goTo(1)">
-      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_back</span>
       Anterior
     </button>
     <button class="btn btn-primary" onclick="goTo(3)">
       Vista interna
-      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
     </button>
   </div>
 </div>
@@ -1345,12 +1264,12 @@ body {
 
     <div class="card-grid">
       <div class="card">
-        <div class="card-icon"><i data-lucide="camera" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">camera_alt</span></div>
         <div class="card-title">Fotografía en tiempo real</div>
         <div class="card-body">Imagen de la superficie del alimento. Permite detectar condensación, formación de hongos o cambios inesperados. La gráfica de abajo te permite volver en el tiempo: haz clic en cualquier punto para ver la foto y las toneladas de esa hora exacta.</div>
       </div>
       <div class="card">
-        <div class="card-icon"><i data-lucide="map" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">map</span></div>
         <div class="card-title">Mapa topográfico</div>
         <div class="card-body">Representación visual del interior del silo. Las zonas oscuras indican donde el alimento está más bajo; las zonas claras, donde está más alto. Útil para detectar vórtices o alimento adherido a los costados por condensación.</div>
       </div>
@@ -1358,24 +1277,24 @@ body {
 
     <div class="card-grid cols-3">
       <div class="card">
-        <div class="card-icon"><i data-lucide="clock" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">schedule</span></div>
         <div class="card-title">24 fotos por día</div>
         <div class="card-body">El sensor dispara automáticamente una fotografía cada hora. Puedes revisar cualquier momento del día o de semanas anteriores.</div>
       </div>
       <div class="card">
-        <div class="card-icon"><i data-lucide="calendar-range" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">date_range</span></div>
         <div class="card-title">Historial sin límite</div>
         <div class="card-body">La información nunca se borra. Consulta periodos de 7 días, 30 días o personaliza las fechas desde el selector de la gráfica.</div>
       </div>
       <div class="card">
-        <div class="card-icon"><i data-lucide="zap" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">bolt</span></div>
         <div class="card-title">Forzar medición</div>
         <div class="card-body">El sensor tiene un botón físico en la tapa del silo. Úsalo para capturar una foto inmediata, por ejemplo, justo después de un llenado.</div>
       </div>
     </div>
 
     <div class="callout warning">
-      <span class="callout-icon"><i data-lucide="alert-triangle" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">warning</span></span>
       <div class="callout-content">
         <strong>Llenado del silo: dos reglas clave</strong>
         Apaga los alimentadores durante el llenado. Si el alimento sale por abajo mientras entra por arriba, la medición no será correcta.<br><br>
@@ -1384,7 +1303,7 @@ body {
     </div>
 
     <div class="callout danger">
-      <span class="callout-icon"><i data-lucide="x-circle" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">cancel</span></span>
       <div class="callout-content">
         <strong>No llenes el silo al 100%</strong>
         Si el alimento queda muy cerca del sensor, este entra en un punto ciego y no puede calcular el nivel con precisión. El nivel máximo recomendado es el <strong>90%</strong> de la capacidad total.
@@ -1405,12 +1324,12 @@ body {
 
   <div class="section-nav">
     <button class="btn btn-secondary" onclick="goTo(2)">
-      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_back</span>
       Anterior
     </button>
     <button class="btn btn-primary" onclick="goTo(4)">
       Calibración
-      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
     </button>
   </div>
 </div>
@@ -1496,7 +1415,7 @@ body {
     </div>
 
     <div class="callout info">
-      <span class="callout-icon"><i data-lucide="flask-conical" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">science</span></span>
       <div class="callout-content">
         <strong>Cómo tomar la muestra de densidad</strong>
         Tara una báscula con el recipiente de 1 litro encima. Agrega alimento hasta la marca del litro y pesa. Anota el resultado. Repite 5 veces con muestras distintas. Promedia los 5 valores: ese número es el que ingresas como densidad en la plataforma.
@@ -1504,7 +1423,7 @@ body {
     </div>
 
     <div class="callout warning">
-      <span class="callout-icon"><i data-lucide="alert-triangle" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">warning</span></span>
       <div class="callout-content">
         <strong>Por qué medir en granja y no en planta</strong>
         El alimento se compacta diferente en el granelero, durante el trayecto y dentro del silo. La densidad real en granja puede diferir de la de planta, lo que afecta directamente la precisión del cálculo de toneladas.
@@ -1514,12 +1433,12 @@ body {
 
   <div class="section-nav">
     <button class="btn btn-secondary" onclick="goTo(3)">
-      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_back</span>
       Anterior
     </button>
     <button class="btn btn-primary" onclick="goTo(5)">
       Recetas
-      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
     </button>
   </div>
 </div>
@@ -1534,7 +1453,7 @@ body {
     </div>
 
     <div class="callout info">
-      <span class="callout-icon"><i data-lucide="layers" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">layers</span></span>
       <div class="callout-content">
         <strong>Estructura de 3 niveles</strong>
         Las recetas funcionan así: primero creas la <strong>Receta</strong> (la dieta individual), luego la agrupas en un <strong>Libro de recetas</strong>, y finalmente asignas ese libro a la <strong>Granja</strong>. Los tres pasos son necesarios.
@@ -1597,7 +1516,7 @@ body {
     </table>
 
     <div class="callout warning">
-      <span class="callout-icon"><i data-lucide="pencil" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">edit</span></span>
       <div class="callout-content">
         <strong>Convención de nombres recomendada</strong>
         Siempre incluye la fase y la fecha: <em>Fase 3 Premex — Junio 2026</em>. Cuando vuelva ese mismo alimento en el próximo lote, crea una receta nueva con la nueva fecha y vuelve a medir la densidad, porque las materias primas pueden cambiar entre lotes.
@@ -1607,12 +1526,12 @@ body {
 
   <div class="section-nav">
     <button class="btn btn-secondary" onclick="goTo(4)">
-      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_back</span>
       Anterior
     </button>
     <button class="btn btn-primary" onclick="goTo(6)">
       Consumo
-      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_forward</span>
     </button>
   </div>
 </div>
@@ -1628,29 +1547,29 @@ body {
 
     <div class="card-grid">
       <div class="card">
-        <div class="card-icon"><i data-lucide="trending-down" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">trending_down</span></div>
         <div class="card-title">Consumo total</div>
         <div class="card-body">Toneladas totales consumidas en el rango de fechas seleccionado. Aparece en la sección de consumo dentro de cada silo.</div>
       </div>
       <div class="card">
-        <div class="card-icon"><i data-lucide="bar-chart-2" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">bar_chart</span></div>
         <div class="card-title">Consumo promedio</div>
         <div class="card-body">Toneladas por día en promedio dentro del rango seleccionado. Útil para estimar cuántos días más dura el inventario actual.</div>
       </div>
       <div class="card">
-        <div class="card-icon"><i data-lucide="refresh-cw" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">refresh</span></div>
         <div class="card-title">Consumo típico (30 días)</div>
         <div class="card-body">Promedio de los últimos 30 días. Refleja la tendencia general del lote completo.</div>
       </div>
       <div class="card">
-        <div class="card-icon"><i data-lucide="zap" style="width:18px;height:18px;"></i></div>
+        <div class="card-icon"><span class="material-symbols-outlined" style="font-size: 18px;">bolt</span></div>
         <div class="card-title">Consumo actual (2 días)</div>
         <div class="card-body">Promedio de los últimos 2 días. Más preciso en etapas de crecimiento como presebo y ceba, donde el consumo aumenta cada día.</div>
       </div>
     </div>
 
     <div class="callout info">
-      <span class="callout-icon"><i data-lucide="info" style="width:16px;height:16px;"></i></span>
+      <span class="callout-icon"><span class="material-symbols-outlined" style="font-size: 16px;">info</span></span>
       <div class="callout-content">
         <strong>En presebo y ceba, usa el consumo de 2 días para proyectar</strong>
         Como los animales crecen y consumen más cada día, el promedio de 30 días subestimaría el consumo real actual y podrías quedarte sin alimento antes de lo esperado.
@@ -1660,27 +1579,27 @@ body {
     <div class="practices-list">
       <div class="practices-title">Buenas prácticas</div>
       <div class="practice-item">
-        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <span class="practice-icon"><span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span></span>
         <div><strong>Llena al 90%</strong> — evita el punto ciego del sensor y garantiza mediciones precisas todos los días.</div>
       </div>
       <div class="practice-item">
-        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <span class="practice-icon"><span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span></span>
         <div><strong>Apaga los alimentadores en el llenado</strong> — si el alimento sale mientras entra, la medición del cargue será incorrecta.</div>
       </div>
       <div class="practice-item">
-        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <span class="practice-icon"><span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span></span>
         <div><strong>Mide la densidad en cada lote</strong> — las materias primas cambian entre lotes y la densidad puede variar.</div>
       </div>
       <div class="practice-item">
-        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <span class="practice-icon"><span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span></span>
         <div><strong>Nombra las recetas con fecha</strong> — así el historial es trazable lote por lote.</div>
       </div>
       <div class="practice-item">
-        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <span class="practice-icon"><span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span></span>
         <div><strong>Revisa el panel todos los lunes</strong> — establece una rutina semanal de pedidos basada en el inventario real.</div>
       </div>
       <div class="practice-item">
-        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <span class="practice-icon"><span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span></span>
         <div><strong>Controla los tiempos de almacenamiento</strong> — si el alimento permanece mucho tiempo en el silo caliente puede aparecer condensación y favorecer el crecimiento de hongos o micotoxinas.</div>
       </div>
     </div>
@@ -1709,7 +1628,7 @@ body {
 
     <div class="completion-card">
       <div class="completion-icon">
-        <i data-lucide="check" style="width:24px;height:24px;"></i>
+        <span class="material-symbols-outlined" style="font-size: 24px;">check</span>
       </div>
       <div class="completion-title">Tutorial completado</div>
       <p class="completion-desc">Ya conoces los fundamentos de la plataforma Insylo. Para dudas adicionales, contacta al equipo de soporte o vuelve a consultar esta guía en cualquier momento.</p>
@@ -1718,11 +1637,11 @@ body {
 
   <div class="section-nav">
     <button class="btn btn-secondary" onclick="goTo(5)">
-      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">arrow_back</span>
       Anterior
     </button>
     <button class="btn btn-primary" onclick="goTo(0)">
-      <i data-lucide="rotate-ccw" style="width:15px;height:15px;"></i>
+      <span class="material-symbols-outlined" style="font-size: 15px;">restart_alt</span>
       Volver al inicio
     </button>
   </div>
@@ -1733,13 +1652,10 @@ body {
 
 <!-- Mobile toggle -->
 <button class="mobile-toggle" id="mobileToggle" onclick="openSidebar()">
-  <i data-lucide="menu" style="width:20px;height:20px;"></i>
+  <span class="material-symbols-outlined" style="font-size: 20px;">menu</span>
 </button>
 
 <script>
-  // Init Lucide icons
-  document.addEventListener('DOMContentLoaded', () => { lucide.createIcons(); });
-
   let current = 0;
   const total = 7;
   const visited = new Set([0]);
@@ -1770,7 +1686,6 @@ body {
 
     // close sidebar mobile
     closeSidebar();
-    lucide.createIcons();
   }
 
   function openSidebar() {
@@ -1802,7 +1717,6 @@ body {
     fb.textContent = correct
       ? 'Correcto. Muy bien.'
       : 'No es correcto. Revisa la sección y vuelve a intentarlo.';
-    lucide.createIcons();
   }
 </script>
 </body>
