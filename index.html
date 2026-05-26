@@ -181,6 +181,42 @@
         .card-link .material-symbols-outlined { font-size: 18px; transition: transform 0.2s; }
         .card:hover .card-link .material-symbols-outlined { transform: translateX(4px); }
 
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+            padding-top: 1rem;
+        }
+
+        .card-btn {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            border: none;
+            transition: background 0.2s, box-shadow 0.2s;
+        }
+
+        .card-btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+        .card-btn-primary:hover { background: var(--primary-hover); }
+
+        .card-btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            cursor: default;
+        }
+
         .product-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -644,37 +680,73 @@
             <section class="section" style="background: var(--surface-container-low);">
                 <div class="container">
                     <div class="cards-grid">
-                        <div class="card" onclick="window.open('https://landing-pig-vision.vercel.app/', '_blank')">
+                        <div class="card" style="display: flex; flex-direction: column; cursor: default;">
                             <div class="card-icon aqua">
                                 <span class="material-symbols-outlined">videocam</span>
                             </div>
                             <h3 data-es="PigVision" data-en="PigVision">PigVision</h3>
                             <p data-es="Cámara de pesaje e inteligencia artificial para análisis." data-en="Weighing camera and artificial intelligence for analysis.">Cámara de pesaje e inteligencia artificial para análisis.</p>
-                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+                            <div class="card-actions">
+                                <a href="https://landing-pig-vision.vercel.app/" target="_blank" class="card-btn card-btn-primary">
+                                    <span data-es="Guía de instalación" data-en="Installation guide">Guía de instalación</span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                                </a>
+                                <span class="card-btn card-btn-secondary">
+                                    <span data-es="Guía de uso" data-en="Usage guide">Guía de uso</span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">visibility</span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="card" onclick="window.open('https://landing-insylo.vercel.app/', '_blank')">
+                        <div class="card" style="display: flex; flex-direction: column; cursor: default;">
                             <div class="card-icon primary">
                                 <span class="material-symbols-outlined">grain</span>
                             </div>
                             <h3 data-es="Insylo" data-en="Insylo">Insylo</h3>
                             <p data-es="Sistema de control y automatización para galpones." data-en="Control and automation system for poultry houses.">Sistema de control y automatización para galpones.</p>
-                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+                            <div class="card-actions">
+                                <a href="https://landing-insylo.vercel.app/" target="_blank" class="card-btn card-btn-primary">
+                                    <span data-es="Guía de instalación" data-en="Installation guide">Guía de instalación</span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                                </a>
+                                <span class="card-btn card-btn-secondary">
+                                    <span data-es="Guía de uso" data-en="Usage guide">Guía de uso</span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">visibility</span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="card" onclick="showPage('guide-nodos')">
+                        <div class="card" style="display: flex; flex-direction: column; cursor: default;">
                             <div class="card-icon primary">
                                 <span class="material-symbols-outlined">sensors</span>
                             </div>
                             <h3 data-es="Nodos Ambientales" data-en="Ambient Nodes">Nodos Ambientales</h3>
                             <p data-es="Sensores de temperatura, humedad y CO2 para monitoreo ambiental." data-en="Temperature, humidity and CO2 sensors for environmental monitoring.">Sensores de temperatura, humedad y CO2 para monitoreo ambiental.</p>
-                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+                            <div class="card-actions">
+                                <a href="#" onclick="showPage('guide-nodos'); return false;" class="card-btn card-btn-primary">
+                                    <span data-es="Guía de instalación" data-en="Installation guide">Guía de instalación</span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                                </a>
+                                <span class="card-btn card-btn-secondary">
+                                    <span data-es="Guía de uso" data-en="Usage guide">Guía de uso</span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">visibility</span>
+                                </span>
+                            </div>
                         </div>
-                        <div class="card" onclick="window.open('https://gateway-lyart-one.vercel.app/', '_blank')">
+                        <div class="card" style="display: flex; flex-direction: column; cursor: default;">
                             <div class="card-icon primary">
                                 <span class="material-symbols-outlined">router</span>
                             </div>
                             <h3 data-es="Gateway" data-en="Gateway">Gateway</h3>
                             <p data-es="Dispositivo de conectividad y comunicación para la red de sensores." data-en="Connectivity and communication device for sensor network.">Dispositivo de conectividad y comunicación para la red de sensores.</p>
-                            <span class="card-link"><span data-es="Ver guía" data-en="View guide">Ver guía</span> <span class="material-symbols-outlined">arrow_forward</span></span>
+                            <div class="card-actions">
+                                <a href="https://gateway-lyart-one.vercel.app/" target="_blank" class="card-btn card-btn-primary">
+                                    <span data-es="Guía de instalación" data-en="Installation guide">Guía de instalación</span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">download</span>
+                                </a>
+                                <span class="card-btn card-btn-secondary">
+                                    <span data-es="Guía de uso" data-en="Usage guide">Guía de uso</span>
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">visibility</span>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
