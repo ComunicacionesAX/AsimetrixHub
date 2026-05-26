@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insylo — Guía de la plataforma</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js">
+<script src="https://unpkg.com/lucide@0.383.0/dist/umd/lucide.min.js"></script>
+<style>
+/* ─── Tokens Asimetrix ─────────────────────────────────────── */
+:root {
+  /* Marca primaria */
+  --ax-brand-primary:        #006084;
+  --ax-brand-primary-hover:  #00547A;
+  --ax-brand-primary-pressed:#00415F;
+  --ax-brand-primary-soft:   #E5EFF3;
+
+  /* Texto modo claro */
+  --ax-fg-1: #0A0F3D;
+  --ax-fg-2: #4A5566;
+  --ax-fg-3: #6C7878;
+  --ax-fg-disabled: #B4BDC4;
+
+  /* Superficies modo claro */
+  --ax-bg-1: #FFFFFF;
+  --ax-bg-2: #F5F6F8;
+  --ax-bg-3: #ECEEF1;
+  --ax-border: #D8DCE0;
+  --ax-border-strong: #B4BDC4;
+
+  /* Semánticos */
+  --ax-success:       #2E8B57;
+  --ax-success-soft:  #E5F2EB;
+  --ax-warning:       #E0A100;
+  --ax-warning-soft:  #FBF1D6;
+  --ax-danger:        #C62828;
+  --ax-danger-soft:   #FBE5E5;
+  --ax-info:          #006084;
+  --ax-info-soft:     #E5EFF3;
+
+  /* Sombras */
+  --ax-shadow-xs: 0 1px 2px rgba(10,15,61,.06);
+  --ax-shadow-sm: 0 2px 4px rgba(10,15,61,.08);
+  --ax-shadow-md: 0 4px 12px rgba(10,15,61,.10);
+  --ax-shadow-lg: 0 12px 24px rgba(10,15,61,.12);
+
+  /* Movimiento */
+  --ax-ease: cubic-bezier(0.2,0.7,0.2,1);
+  --ax-dur-fast: 120ms;
+  --ax-dur-base: 200ms;
+  --ax-dur-slow: 320ms;
+
+  /* Tipografía */
+  --ax-font: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Radios */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-pill: 999px;
+
+  /* Sidebar */
+  --sidebar-w: 268px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--ax-font);
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-1);
+  background: var(--ax-bg-2);
+  min-height: 100vh;
+}
+
+/* ─── Layout ─────────────────────────────────────────────────── */
+.layout { display: flex; min-height: 100vh; }
+
+/* ─── Sidebar ────────────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--ax-bg-1);
+  border-right: 1px solid var(--ax-border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  overflow-y: auto;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--ax-shadow-sm);
+}
+
+/* Marca en sidebar */
+.sidebar-brand {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--ax-border);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Isotipo SVG (8 nodos) */
+.ax-symbol svg { display: block; }
+
+.brand-text { flex: 1; min-width: 0; }
+
+.brand-product {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ax-brand-primary);
+  line-height: 16px;
+}
+
+.brand-name {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-1);
+  line-height: 23px;
+  margin-top: 1px;
+}
+
+/* Progreso */
+.sidebar-progress {
+  padding: 16px 20px 12px;
+  border-bottom: 1px solid var(--ax-border);
+}
+
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ax-fg-3);
+  letter-spacing: -0.17px;
+}
+
+.progress-pct {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ax-brand-primary);
+}
+
+.progress-track {
+  height: 4px;
+  background: var(--ax-bg-3);
+  border-radius: var(--r-pill);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--ax-brand-primary);
+  border-radius: var(--r-pill);
+  transition: width var(--ax-dur-slow) var(--ax-ease);
+  width: 0%;
+}
+
+/* Nav */
+.sidebar-nav { flex: 1; padding: 8px 0 24px; }
+
+.nav-group-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ax-fg-3);
+  padding: 16px 20px 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  cursor: pointer;
+  color: var(--ax-fg-2);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.2px;
+  line-height: 18px;
+  border-left: 3px solid transparent;
+  transition: background var(--ax-dur-fast) var(--ax-ease),
+              color var(--ax-dur-fast) var(--ax-ease);
+  position: relative;
+  user-select: none;
+}
+
+.nav-item:hover {
+  background: var(--ax-bg-2);
+  color: var(--ax-fg-1);
+}
+
+.nav-item.active {
+  border-left-color: var(--ax-brand-primary);
+  background: var(--ax-brand-primary-soft);
+  color: var(--ax-brand-primary);
+  font-weight: 600;
+}
+
+.nav-item.done {
+  color: var(--ax-success);
+}
+
+.nav-item.done .nav-check {
+  display: flex;
+}
+
+.nav-check {
+  display: none;
+  position: absolute;
+  right: 16px;
+  color: var(--ax-success);
+}
+
+.nav-num {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ax-fg-disabled);
+  width: 22px;
+  flex-shrink: 0;
+  letter-spacing: 0;
+}
+
+.nav-item.active .nav-num { color: var(--ax-brand-primary); }
+.nav-item.done .nav-num { color: var(--ax-success); }
+
+.nav-icon {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+/* ─── Main ────────────────────────────────────────────────────── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Sections ───────────────────────────────────────────────── */
+.section {
+  display: none;
+  flex: 1;
+  animation: ax-fade-up var(--ax-dur-slow) var(--ax-ease) both;
+}
+.section.active { display: flex; flex-direction: column; }
+
+@keyframes ax-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Hero (section 0) ───────────────────────────────────────── */
+.hero {
+  background: var(--ax-bg-1);
+  border-bottom: 1px solid var(--ax-border);
+  padding: 64px 64px 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 320px; height: 100%;
+  background: linear-gradient(135deg, var(--ax-brand-primary-soft) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ax-brand-primary);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.05;
+  color: var(--ax-fg-1);
+  max-width: 560px;
+  margin-bottom: 20px;
+}
+
+.hero-sub {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-2);
+  max-width: 480px;
+  margin-bottom: 40px;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-stat-num {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  color: var(--ax-brand-primary);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-size: 13px;
+  color: var(--ax-fg-3);
+  margin-top: 4px;
+  letter-spacing: -0.17px;
+}
+
+/* ─── Section body ───────────────────────────────────────────── */
+.section-body {
+  padding: 48px 64px 0;
+  flex: 1;
+}
+
+.section-header {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--ax-border);
+}
+
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ax-brand-primary);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  line-height: 32px;
+  color: var(--ax-fg-1);
+  margin-bottom: 10px;
+}
+
+.section-desc {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-2);
+  max-width: 520px;
+}
+
+/* ─── Cards ──────────────────────────────────────────────────── */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.card-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.card-grid.cols-1 { grid-template-columns: 1fr; }
+
+.card {
+  background: var(--ax-bg-1);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  box-shadow: var(--ax-shadow-xs);
+  transition: box-shadow var(--ax-dur-base) var(--ax-ease),
+              border-color var(--ax-dur-base) var(--ax-ease);
+}
+
+.card:hover {
+  box-shadow: var(--ax-shadow-md);
+  border-color: var(--ax-border-strong);
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-md);
+  background: var(--ax-brand-primary-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ax-brand-primary);
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--ax-fg-1);
+  margin-bottom: 8px;
+}
+
+.card-body {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.2px;
+  color: var(--ax-fg-2);
+}
+
+/* Variante elevada (hero intro) */
+.card.elevated {
+  box-shadow: var(--ax-shadow-sm);
+}
+
+/* ─── Callouts ───────────────────────────────────────────────── */
+.callout {
+  display: flex;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--r-lg);
+  border: 1px solid;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.2px;
+}
+
+.callout.info    { background: var(--ax-info-soft);    border-color: rgba(0,96,132,.2);  color: var(--ax-fg-1); }
+.callout.success { background: var(--ax-success-soft); border-color: rgba(46,139,87,.2); color: var(--ax-fg-1); }
+.callout.warning { background: var(--ax-warning-soft); border-color: rgba(224,161,0,.2); color: var(--ax-fg-1); }
+.callout.danger  { background: var(--ax-danger-soft);  border-color: rgba(198,40,40,.2); color: var(--ax-fg-1); }
+
+.callout-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.callout.info    .callout-icon { color: var(--ax-brand-primary); }
+.callout.success .callout-icon { color: var(--ax-success); }
+.callout.warning .callout-icon { color: var(--ax-warning); }
+.callout.danger  .callout-icon { color: var(--ax-danger); }
+
+.callout-content strong {
+  display: block;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: var(--ax-fg-1);
+}
+
+/* ─── Steps ──────────────────────────────────────────────────── */
+.steps { margin-bottom: 32px; }
+
+.step {
+  display: flex;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--ax-border);
+  align-items: flex-start;
+}
+
+.step:last-child { border-bottom: none; }
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--ax-brand-primary-soft);
+  border: 1.5px solid rgba(0,96,132,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ax-brand-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  color: var(--ax-fg-1);
+  margin-bottom: 6px;
+}
+
+.step-body {
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.2px;
+  color: var(--ax-fg-2);
+}
+
+/* ─── Tables ─────────────────────────────────────────────────── */
+.ax-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--ax-bg-1);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  font-size: 14px;
+  margin-bottom: 24px;
+  box-shadow: var(--ax-shadow-xs);
+}
+
+.ax-table th {
+  background: var(--ax-bg-3);
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ax-fg-3);
+  border-bottom: 1px solid var(--ax-border);
+}
+
+.ax-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--ax-border);
+  color: var(--ax-fg-1);
+  vertical-align: top;
+  line-height: 18px;
+}
+
+.ax-table tr:last-child td { border-bottom: none; }
+
+.ax-table tr:hover td { background: var(--ax-bg-2); }
+
+/* ─── Pills / badges ─────────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 10px;
+  border-radius: var(--r-pill);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.17px;
+}
+
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pill.success { background: var(--ax-success-soft); color: var(--ax-success); }
+.pill.success .pill-dot { background: var(--ax-success); }
+.pill.warning { background: var(--ax-warning-soft); color: var(--ax-warning); }
+.pill.warning .pill-dot { background: var(--ax-warning); }
+.pill.info    { background: var(--ax-info-soft);    color: var(--ax-brand-primary); }
+.pill.info    .pill-dot { background: var(--ax-brand-primary); }
+.pill.neutral { background: var(--ax-bg-3); color: var(--ax-fg-2); }
+.pill.neutral .pill-dot { background: var(--ax-fg-3); }
+
+/* ─── Silo diagram card ──────────────────────────────────────── */
+.silo-visual {
+  background: var(--ax-bg-1);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  box-shadow: var(--ax-shadow-sm);
+}
+
+.silo-wrap { flex-shrink: 0; width: 110px; }
+
+.legend-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-1);
+  margin-bottom: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ax-border);
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--ax-fg-2);
+}
+
+.legend-item:last-child { border-bottom: none; }
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.legend-item strong { color: var(--ax-fg-1); font-weight: 600; }
+
+/* ─── Density calculator ─────────────────────────────────────── */
+.density-calc {
+  background: var(--ax-bg-1);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  margin-bottom: 24px;
+  box-shadow: var(--ax-shadow-sm);
+}
+
+.calc-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-1);
+  margin-bottom: 6px;
+}
+
+.calc-sub {
+  font-size: 14px;
+  color: var(--ax-fg-3);
+  margin-bottom: 24px;
+  letter-spacing: -0.2px;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.calc-field { display: flex; flex-direction: column; gap: 6px; }
+
+.calc-field label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ax-fg-3);
+}
+
+.calc-field input {
+  background: var(--ax-bg-3);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--r-sm);
+  padding: 9px 12px;
+  font-family: var(--ax-font);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-1);
+  text-align: center;
+  width: 100%;
+  outline: none;
+  transition: border-color var(--ax-dur-fast) var(--ax-ease),
+              box-shadow var(--ax-dur-fast) var(--ax-ease);
+}
+
+.calc-field input:focus {
+  border-color: var(--ax-brand-primary);
+  box-shadow: 0 0 0 2px rgba(0,96,132,.15);
+}
+
+.calc-field input::placeholder { color: var(--ax-fg-disabled); font-weight: 400; }
+
+.calc-result {
+  background: var(--ax-brand-primary-soft);
+  border: 1px solid rgba(0,96,132,.2);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calc-result-left { flex: 1; }
+
+.calc-result-label {
+  font-size: 13px;
+  color: var(--ax-fg-2);
+  margin-bottom: 2px;
+}
+
+.calc-result-unit {
+  font-size: 11px;
+  color: var(--ax-fg-3);
+}
+
+.calc-result-val {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.45px;
+  color: var(--ax-brand-primary);
+}
+
+/* ─── Quiz ───────────────────────────────────────────────────── */
+.quiz-card {
+  background: var(--ax-bg-1);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--ax-shadow-xs);
+}
+
+.quiz-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--ax-brand-primary);
+  margin-bottom: 10px;
+}
+
+.quiz-q {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-1);
+  margin-bottom: 16px;
+  line-height: 20px;
+}
+
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+
+.quiz-option {
+  padding: 11px 16px;
+  background: var(--ax-bg-2);
+  border: 1.5px solid var(--ax-border);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  color: var(--ax-fg-2);
+  font-family: var(--ax-font);
+  font-size: 14px;
+  letter-spacing: -0.2px;
+  text-align: left;
+  transition: border-color var(--ax-dur-fast) var(--ax-ease),
+              background var(--ax-dur-fast) var(--ax-ease),
+              color var(--ax-dur-fast) var(--ax-ease);
+}
+
+.quiz-option:hover:not(:disabled) {
+  border-color: var(--ax-brand-primary);
+  background: var(--ax-brand-primary-soft);
+  color: var(--ax-fg-1);
+}
+
+.quiz-option:active:not(:disabled) { transform: scale(0.98); }
+
+.quiz-option.correct {
+  background: var(--ax-success-soft);
+  border-color: var(--ax-success);
+  color: var(--ax-success);
+  font-weight: 600;
+}
+
+.quiz-option.incorrect {
+  background: var(--ax-danger-soft);
+  border-color: var(--ax-danger);
+  color: var(--ax-danger);
+}
+
+.quiz-option:disabled { cursor: default; }
+
+.quiz-feedback {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: var(--r-md);
+  font-size: 13px;
+  letter-spacing: -0.17px;
+  display: none;
+}
+
+.quiz-feedback.show { display: block; }
+.quiz-feedback.ok   { background: var(--ax-success-soft); border: 1px solid rgba(46,139,87,.2); color: var(--ax-success); }
+.quiz-feedback.fail { background: var(--ax-danger-soft);  border: 1px solid rgba(198,40,40,.2); color: var(--ax-danger); }
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--r-md);
+  border: none;
+  font-family: var(--ax-font);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  cursor: pointer;
+  transition: background var(--ax-dur-fast) var(--ax-ease),
+              box-shadow var(--ax-dur-fast) var(--ax-ease),
+              transform var(--ax-dur-fast) var(--ax-ease);
+}
+
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.38; cursor: not-allowed; transform: none; }
+
+.btn-primary {
+  background: var(--ax-brand-primary);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--ax-brand-primary-hover);
+  box-shadow: var(--ax-shadow-md);
+}
+
+.btn-primary:active:not(:disabled) { background: var(--ax-brand-primary-pressed); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ax-brand-primary);
+  border: 1.5px solid var(--ax-brand-primary);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--ax-brand-primary-soft);
+}
+
+/* ─── Nav footer ─────────────────────────────────────────────── */
+.section-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 64px 64px;
+  margin-top: 48px;
+  border-top: 1px solid var(--ax-border);
+}
+
+/* ─── Good practices list ────────────────────────────────────── */
+.practices-list {
+  background: var(--ax-bg-1);
+  border: 1px solid var(--ax-border);
+  border-radius: var(--r-lg);
+  padding: 28px;
+  box-shadow: var(--ax-shadow-sm);
+  margin-bottom: 24px;
+}
+
+.practices-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--ax-fg-1);
+  margin-bottom: 20px;
+}
+
+.practice-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--ax-border);
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: -0.2px;
+  color: var(--ax-fg-2);
+}
+
+.practice-item:last-child { border-bottom: none; }
+
+.practice-icon {
+  color: var(--ax-success);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.practice-item strong { color: var(--ax-fg-1); font-weight: 600; }
+
+/* ─── Completion state ───────────────────────────────────────── */
+.completion-card {
+  background: var(--ax-success-soft);
+  border: 1px solid rgba(46,139,87,.2);
+  border-radius: var(--r-xl);
+  padding: 40px;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.completion-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ax-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+}
+
+.completion-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.45px;
+  color: var(--ax-fg-1);
+  margin-bottom: 8px;
+}
+
+.completion-desc {
+  font-size: 14px;
+  color: var(--ax-fg-2);
+  max-width: 380px;
+  margin: 0 auto;
+  line-height: 18px;
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────── */
+.mobile-toggle {
+  display: none;
+  position: fixed;
+  bottom: 20px; right: 20px;
+  width: 48px; height: 48px;
+  background: var(--ax-brand-primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 300;
+  box-shadow: var(--ax-shadow-lg);
+  transition: background var(--ax-dur-fast) var(--ax-ease);
+}
+
+.mobile-toggle:hover { background: var(--ax-brand-primary-hover); }
+
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(10,15,61,.4);
+  z-index: 150;
+}
+
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+
+  .sidebar {
+    transform: translateX(-268px);
+    width: 268px;
+    transition: transform var(--ax-dur-slow) var(--ax-ease);
+  }
+
+  .sidebar.open { transform: translateX(0); }
+
+  .main { margin-left: 0; }
+
+  .hero, .section-body { padding-left: 24px; padding-right: 24px; }
+
+  .hero h1 { font-size: 32px; }
+
+  .card-grid { grid-template-columns: 1fr; }
+  .card-grid.cols-3 { grid-template-columns: 1fr 1fr; }
+
+  .section-nav { padding: 32px 24px 48px; }
+
+  .silo-visual { flex-direction: column; }
+
+  .calc-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .mobile-toggle { display: flex; }
+
+  .mobile-overlay.open { display: block; }
+}
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- ═══ SIDEBAR ══════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+
+  <!-- Marca -->
+  <div class="sidebar-brand">
+    <div class="ax-symbol">
+      <!-- Isotipo: 8 nodos alrededor de nodo central -->
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="18" r="3.5" fill="#006084"/>
+        <!-- Nodos perimetrales y radios -->
+        <line x1="18" y1="18" x2="18" y2="5"  stroke="#006084" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="28.5" y2="9.5" stroke="#006084" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="31" y2="18" stroke="#006084" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="28.5" y2="26.5" stroke="#006084" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="18" y2="31" stroke="#006084" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="7.5"  y2="26.5" stroke="#006084" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="5"  y2="18"  stroke="#006084" stroke-width="1.2"/>
+        <line x1="18" y1="18" x2="7.5"  y2="9.5" stroke="#006084" stroke-width="1.2"/>
+        <circle cx="18" cy="5"    r="2.5" fill="#006084"/>
+        <circle cx="28.5" cy="9.5"  r="2.5" fill="#006084"/>
+        <circle cx="31"   cy="18"   r="2.5" fill="#006084"/>
+        <circle cx="28.5" cy="26.5" r="2.5" fill="#006084"/>
+        <circle cx="18"   cy="31"   r="2.5" fill="#006084"/>
+        <circle cx="7.5"  cy="26.5" r="2.5" fill="#006084"/>
+        <circle cx="5"    cy="18"   r="2.5" fill="#006084"/>
+        <circle cx="7.5"  cy="9.5"  r="2.5" fill="#006084"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <div class="brand-product">Asimetrix</div>
+      <div class="brand-name">Insylo</div>
+    </div>
+  </div>
+
+  <!-- Progreso -->
+  <div class="sidebar-progress">
+    <div class="progress-meta">
+      <span class="progress-label">Progreso del tutorial</span>
+      <span class="progress-pct" id="progressPct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="sidebar-nav">
+    <div class="nav-group-label">Contenido</div>
+    <div class="nav-item active" data-s="0" onclick="goTo(0)">
+      <span class="nav-num">00</span>
+      <span class="nav-icon" data-lucide="layout-dashboard" style="width:14px;height:14px;"></span>
+      Introducción
+      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+    </div>
+    <div class="nav-item" data-s="1" onclick="goTo(1)">
+      <span class="nav-num">01</span>
+      <span class="nav-icon" data-lucide="log-in" style="width:14px;height:14px;"></span>
+      Acceso a la plataforma
+      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+    </div>
+    <div class="nav-item" data-s="2" onclick="goTo(2)">
+      <span class="nav-num">02</span>
+      <span class="nav-icon" data-lucide="bar-chart-2" style="width:14px;height:14px;"></span>
+      Panel principal
+      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+    </div>
+    <div class="nav-item" data-s="3" onclick="goTo(3)">
+      <span class="nav-num">03</span>
+      <span class="nav-icon" data-lucide="camera" style="width:14px;height:14px;"></span>
+      Vista interna del silo
+      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+    </div>
+    <div class="nav-item" data-s="4" onclick="goTo(4)">
+      <span class="nav-num">04</span>
+      <span class="nav-icon" data-lucide="sliders" style="width:14px;height:14px;"></span>
+      Calibración y densidad
+      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+    </div>
+    <div class="nav-item" data-s="5" onclick="goTo(5)">
+      <span class="nav-num">05</span>
+      <span class="nav-icon" data-lucide="clipboard-list" style="width:14px;height:14px;"></span>
+      Recetas y dietas
+      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+    </div>
+    <div class="nav-item" data-s="6" onclick="goTo(6)">
+      <span class="nav-num">06</span>
+      <span class="nav-icon" data-lucide="trending-down" style="width:14px;height:14px;"></span>
+      Consumo y buenas prácticas
+      <span class="nav-check" data-lucide="check" style="width:13px;height:13px;"></span>
+    </div>
+  </nav>
+</aside>
+
+<!-- overlay mobile -->
+<div class="mobile-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- ═══ MAIN ══════════════════════════════════════════════════ -->
+<main class="main">
+
+<!-- ── S0: Introducción ────────────────────────────────────── -->
+<div class="section active" id="section-0">
+  <div class="hero">
+    <div class="hero-eyebrow">Guía de usuario — Insylo</div>
+    <h1>Controla tu inventario de alimento en tiempo real</h1>
+    <p class="hero-sub">Aprende a usar Insylo: monitorea tus silos, administra dietas y analiza el consumo desde cualquier dispositivo.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">24</div>
+        <div class="hero-stat-label">fotos por día, cada hora</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">3%</div>
+        <div class="hero-stat-label">margen de error máximo</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">90%</div>
+        <div class="hero-stat-label">nivel ideal de llenado</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="card-grid cols-3" style="margin-top:8px;">
+      <div class="card elevated">
+        <div class="card-icon"><i data-lucide="wifi" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Qué es Insylo</div>
+        <div class="card-body">Una plataforma IoT que instala sensores en tus silos para medir el nivel de alimento automáticamente cada hora, sin intervención manual.</div>
+      </div>
+      <div class="card elevated">
+        <div class="card-icon"><i data-lucide="target" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Para qué sirve</div>
+        <div class="card-body">Saber en tiempo real cuánto alimento tienes, cuándo hacer el pedido, detectar problemas de calidad y calcular el consumo real por día.</div>
+      </div>
+      <div class="card elevated">
+        <div class="card-icon"><i data-lucide="smartphone" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Desde dónde accedes</div>
+        <div class="card-body">Desde el celular o el computador, en el navegador. No necesitas instalar ninguna aplicación. Dirección: <strong>app.insylo.io</strong></div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon"><i data-lucide="info" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Quién debería usar esta guía</strong>
+        Cualquier persona de granja que haga pedidos de alimento, y el personal de planta que quiera revisar inventarios de forma remota.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <span></span>
+    <button class="btn btn-primary" onclick="goTo(1)">
+      Comenzar
+      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ── S1: Acceso ──────────────────────────────────────────── -->
+<div class="section" id="section-1">
+  <div class="section-body">
+    <div class="section-header">
+      <div class="section-eyebrow">Sección 01</div>
+      <div class="section-title">Acceso a la plataforma</div>
+      <p class="section-desc">Cómo crear tu cuenta, validar el correo y entrar por primera vez a Insylo.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Recibe el correo de validación</div>
+          <div class="step-body">Al registrarte, Insylo envía un correo de validación a la dirección que registraste. Revisa también la bandeja de spam si no lo encuentras en los primeros minutos.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Abre el enlace del correo</div>
+          <div class="step-body">Haz clic en el enlace del correo. Si no funciona, ingresa directamente a <strong>app.insylo.io</strong> y usa la opción "Olvidé mi contraseña" para reenviar la validación.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Crea tu contraseña</div>
+          <div class="step-body">La contraseña requiere mínimo 12 caracteres, combinando letras y números. Guárdala en un lugar seguro.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Inicia sesión</div>
+          <div class="step-body">Con tu correo y la nueva contraseña, ingresa a <strong>app.insylo.io</strong>. Si todo salió bien, verás el panel principal con tus granjas y silos.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <span class="callout-icon"><i data-lucide="alert-triangle" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Si tienes varias granjas</strong>
+        Una sola cuenta puede tener acceso a múltiples granjas. Todas aparecen en el panel principal al iniciar sesión.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <button class="btn btn-secondary" onclick="goTo(0)">
+      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      Anterior
+    </button>
+    <button class="btn btn-primary" onclick="goTo(2)">
+      Panel principal
+      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ── S2: Panel principal ─────────────────────────────────── -->
+<div class="section" id="section-2">
+  <div class="section-body">
+    <div class="section-header">
+      <div class="section-eyebrow">Sección 02</div>
+      <div class="section-title">Panel principal</div>
+      <p class="section-desc">Entiende el dashboard general: qué significa cada dato que ves al entrar a la plataforma.</p>
+    </div>
+
+    <div class="silo-visual">
+      <div class="silo-wrap">
+        <svg viewBox="0 0 100 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- techo cónico -->
+          <polygon points="50,6 82,34 18,34" fill="#ECEEF1" stroke="#D8DCE0" stroke-width="1.5"/>
+          <!-- cuerpo silo -->
+          <rect x="18" y="33" width="64" height="120" rx="3" fill="#F5F6F8" stroke="#D8DCE0" stroke-width="1.5"/>
+          <!-- alimento (70%) -->
+          <rect x="19" y="69" width="62" height="83" fill="#E5EFF3" rx="1"/>
+          <!-- línea 90% -->
+          <line x1="17" y1="57" x2="83" y2="57" stroke="#2E8B57" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="85" y="60" font-family="SF Pro Display,Roboto,Helvetica,sans-serif" font-size="7" fill="#2E8B57" font-weight="600">90%</text>
+          <!-- sensor -->
+          <circle cx="50" cy="18" r="5" fill="#006084" stroke="#fff" stroke-width="1.5"/>
+          <line x1="50" y1="23" x2="50" y2="60" stroke="#006084" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
+          <!-- patas -->
+          <line x1="32" y1="153" x2="27" y2="178" stroke="#B4BDC4" stroke-width="2" stroke-linecap="round"/>
+          <line x1="50" y1="153" x2="50" y2="178" stroke="#B4BDC4" stroke-width="2" stroke-linecap="round"/>
+          <line x1="68" y1="153" x2="73" y2="178" stroke="#B4BDC4" stroke-width="2" stroke-linecap="round"/>
+          <!-- alimentador -->
+          <rect x="38" y="170" width="24" height="7" rx="2" fill="#ECEEF1" stroke="#D8DCE0" stroke-width="1"/>
+        </svg>
+      </div>
+      <div style="flex:1;">
+        <div class="legend-title">Indicadores del panel</div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#006084;"></div>
+          <div><strong>Sensor</strong> — toma 1 fotografía por hora, 24 veces al día</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#E5EFF3;border:1.5px solid #006084;"></div>
+          <div><strong>Nivel de alimento</strong> — toneladas actuales estimadas en el silo</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#2E8B57;"></div>
+          <div><strong>Nivel 90%</strong> — límite máximo recomendado para evitar punto ciego</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-dot" style="background:#B4BDC4;"></div>
+          <div><strong>Toneladas libres</strong> — capacidad disponible para el próximo cargue</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="ax-table">
+      <thead>
+        <tr>
+          <th>Dato en pantalla</th>
+          <th>Qué significa</th>
+          <th>Cómo lo usas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill info"><span class="pill-dot"></span>Peso actual</span></td>
+          <td>Toneladas estimadas en este momento</td>
+          <td>Referencia para decidir cuándo hacer el pedido</td>
+        </tr>
+        <tr>
+          <td><span class="pill info"><span class="pill-dot"></span>Toneladas libres</span></td>
+          <td>Capacidad disponible hasta el 100% del silo</td>
+          <td>Define el tamaño máximo del próximo cargue</td>
+        </tr>
+        <tr>
+          <td><span class="pill warning"><span class="pill-dot"></span>Días de inventario</span></td>
+          <td>Días estimados hasta que el silo se vacíe</td>
+          <td>Alarma anticipada para programar el pedido</td>
+        </tr>
+        <tr>
+          <td><span class="pill neutral"><span class="pill-dot"></span>% Inventario</span></td>
+          <td>Porcentaje de llenado sobre la capacidad total</td>
+          <td>Vista rápida del estado del silo</td>
+        </tr>
+        <tr>
+          <td><span class="pill success"><span class="pill-dot"></span>Última actualización</span></td>
+          <td>Minutos desde la última fotografía</td>
+          <td>Verifica que el sensor esté funcionando</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout info">
+      <span class="callout-icon"><i data-lucide="calendar" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Rutina semanal recomendada</strong>
+        Entra al panel todos los lunes en la mañana, revisa el inventario de cada silo y decide los pedidos de la semana con base en las toneladas disponibles y los días de inventario.
+      </div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon"><i data-lucide="download-cloud" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Exportar a Excel</strong>
+        En la parte superior derecha del panel hay un ícono de descarga. Al hacer clic, obtienes un Excel con los datos actuales de todos los silos. Esta función está disponible solo desde el computador.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <button class="btn btn-secondary" onclick="goTo(1)">
+      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      Anterior
+    </button>
+    <button class="btn btn-primary" onclick="goTo(3)">
+      Vista interna
+      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ── S3: Vista interna ───────────────────────────────────── -->
+<div class="section" id="section-3">
+  <div class="section-body">
+    <div class="section-header">
+      <div class="section-eyebrow">Sección 03</div>
+      <div class="section-title">Vista interna del silo</div>
+      <p class="section-desc">Al entrar a cada silo ves la fotografía en tiempo real, la gráfica histórica y el mapa topográfico del interior.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon"><i data-lucide="camera" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Fotografía en tiempo real</div>
+        <div class="card-body">Imagen de la superficie del alimento. Permite detectar condensación, formación de hongos o cambios inesperados. La gráfica de abajo te permite volver en el tiempo: haz clic en cualquier punto para ver la foto y las toneladas de esa hora exacta.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i data-lucide="map" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Mapa topográfico</div>
+        <div class="card-body">Representación visual del interior del silo. Las zonas oscuras indican donde el alimento está más bajo; las zonas claras, donde está más alto. Útil para detectar vórtices o alimento adherido a los costados por condensación.</div>
+      </div>
+    </div>
+
+    <div class="card-grid cols-3">
+      <div class="card">
+        <div class="card-icon"><i data-lucide="clock" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">24 fotos por día</div>
+        <div class="card-body">El sensor dispara automáticamente una fotografía cada hora. Puedes revisar cualquier momento del día o de semanas anteriores.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i data-lucide="calendar-range" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Historial sin límite</div>
+        <div class="card-body">La información nunca se borra. Consulta periodos de 7 días, 30 días o personaliza las fechas desde el selector de la gráfica.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i data-lucide="zap" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Forzar medición</div>
+        <div class="card-body">El sensor tiene un botón físico en la tapa del silo. Úsalo para capturar una foto inmediata, por ejemplo, justo después de un llenado.</div>
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <span class="callout-icon"><i data-lucide="alert-triangle" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Llenado del silo: dos reglas clave</strong>
+        Apaga los alimentadores durante el llenado. Si el alimento sale por abajo mientras entra por arriba, la medición no será correcta.<br><br>
+        Una vez termine el llenado, espera la próxima fotografía automática (máximo 1 hora) o sube y presiona el botón físico del sensor para obtener el dato de inmediato.
+      </div>
+    </div>
+
+    <div class="callout danger">
+      <span class="callout-icon"><i data-lucide="x-circle" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>No llenes el silo al 100%</strong>
+        Si el alimento queda muy cerca del sensor, este entra en un punto ciego y no puede calcular el nivel con precisión. El nivel máximo recomendado es el <strong>90%</strong> de la capacidad total.
+      </div>
+    </div>
+
+    <div class="quiz-card" id="quiz-3">
+      <div class="quiz-label">Comprueba lo aprendido</div>
+      <div class="quiz-q">Justo después de terminar el llenado del silo, ¿qué debes hacer?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="checkQuiz('quiz-3',this,false)">Esperar al día siguiente para revisar el dato</button>
+        <button class="quiz-option" onclick="checkQuiz('quiz-3',this,true)">Esperar la próxima foto automática o presionar el botón físico del sensor</button>
+        <button class="quiz-option" onclick="checkQuiz('quiz-3',this,false)">Prender los alimentadores para que el alimento empiece a circular</button>
+      </div>
+      <div class="quiz-feedback" id="quiz-3-fb"></div>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <button class="btn btn-secondary" onclick="goTo(2)">
+      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      Anterior
+    </button>
+    <button class="btn btn-primary" onclick="goTo(4)">
+      Calibración
+      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ── S4: Calibración y densidad ─────────────────────────── -->
+<div class="section" id="section-4">
+  <div class="section-body">
+    <div class="section-header">
+      <div class="section-eyebrow">Sección 04</div>
+      <div class="section-title">Calibración y densidad</div>
+      <p class="section-desc">Para que el peso en toneladas sea preciso, el sistema necesita 4 parámetros. El más importante es la densidad real del alimento en granja.</p>
+    </div>
+
+    <table class="ax-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Parámetro</th>
+          <th>Descripción</th>
+          <th>Frecuencia</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="pill info"><span class="pill-dot"></span>1</span></td>
+          <td><strong>Medidas del silo</strong></td>
+          <td>Altura, distancia entre patas, distancia del alimentador al suelo. Se registran durante la instalación.</td>
+          <td><span class="pill success"><span class="pill-dot"></span>Una sola vez</span></td>
+        </tr>
+        <tr>
+          <td><span class="pill info"><span class="pill-dot"></span>2</span></td>
+          <td><strong>Densidad del alimento</strong></td>
+          <td>Peso en g/L del alimento real en granja. Convierte el volumen en toneladas con precisión.</td>
+          <td><span class="pill warning"><span class="pill-dot"></span>Cada lote activo</span></td>
+        </tr>
+        <tr>
+          <td><span class="pill info"><span class="pill-dot"></span>3</span></td>
+          <td><strong>Calibración de vacío</strong></td>
+          <td>Cuando el silo queda vacío, el sensor toma una foto de referencia y valida sus medidas internas.</td>
+          <td><span class="pill success"><span class="pill-dot"></span>Automático</span></td>
+        </tr>
+        <tr>
+          <td><span class="pill info"><span class="pill-dot"></span>4</span></td>
+          <td><strong>Temperatura</strong></td>
+          <td>El dispositivo ajusta sus medidas por la expansión o contracción del metal según la temperatura del ambiente.</td>
+          <td><span class="pill success"><span class="pill-dot"></span>Automático</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="density-calc">
+      <div class="calc-title">Calculadora de densidad</div>
+      <div class="calc-sub">Ingresa los 5 pesos medidos en gramos (recipiente de 1 litro). El promedio es la densidad a registrar en la receta.</div>
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label>Muestra 1</label>
+          <input type="number" id="d1" placeholder="1040" oninput="calcDensity()">
+        </div>
+        <div class="calc-field">
+          <label>Muestra 2</label>
+          <input type="number" id="d2" placeholder="1020" oninput="calcDensity()">
+        </div>
+        <div class="calc-field">
+          <label>Muestra 3</label>
+          <input type="number" id="d3" placeholder="1080" oninput="calcDensity()">
+        </div>
+        <div class="calc-field">
+          <label>Muestra 4</label>
+          <input type="number" id="d4" placeholder="1000" oninput="calcDensity()">
+        </div>
+        <div class="calc-field">
+          <label>Muestra 5</label>
+          <input type="number" id="d5" placeholder="1060" oninput="calcDensity()">
+        </div>
+      </div>
+      <div class="calc-result">
+        <div class="calc-result-left">
+          <div class="calc-result-label">Densidad promedio — ingresa este valor en la receta</div>
+          <div class="calc-result-unit">g/L = kg/m³</div>
+        </div>
+        <div class="calc-result-val" id="densityResult">—</div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon"><i data-lucide="flask-conical" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Cómo tomar la muestra de densidad</strong>
+        Tara una báscula con el recipiente de 1 litro encima. Agrega alimento hasta la marca del litro y pesa. Anota el resultado. Repite 5 veces con muestras distintas. Promedia los 5 valores: ese número es el que ingresas como densidad en la plataforma.
+      </div>
+    </div>
+
+    <div class="callout warning">
+      <span class="callout-icon"><i data-lucide="alert-triangle" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Por qué medir en granja y no en planta</strong>
+        El alimento se compacta diferente en el granelero, durante el trayecto y dentro del silo. La densidad real en granja puede diferir de la de planta, lo que afecta directamente la precisión del cálculo de toneladas.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <button class="btn btn-secondary" onclick="goTo(3)">
+      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      Anterior
+    </button>
+    <button class="btn btn-primary" onclick="goTo(5)">
+      Recetas
+      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ── S5: Recetas ─────────────────────────────────────────── -->
+<div class="section" id="section-5">
+  <div class="section-body">
+    <div class="section-header">
+      <div class="section-eyebrow">Sección 05</div>
+      <div class="section-title">Recetas y dietas</div>
+      <p class="section-desc">Cómo crear y organizar las dietas de cada granja para que el sistema calcule correctamente el inventario por tipo de alimento.</p>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon"><i data-lucide="layers" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Estructura de 3 niveles</strong>
+        Las recetas funcionan así: primero creas la <strong>Receta</strong> (la dieta individual), luego la agrupas en un <strong>Libro de recetas</strong>, y finalmente asignas ese libro a la <strong>Granja</strong>. Los tres pasos son necesarios.
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Crea la receta</div>
+          <div class="step-body">Ve a <strong>Recetas → Recetas → Añadir receta</strong>. Elige la granja, ingresa el nombre de la dieta (ej: <em>Fase 3 Premex — Mayo 2026</em>), el código si lo tienes, la descripción y la densidad medida en campo. Guarda.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Crea el libro de recetas</div>
+          <div class="step-body">Ve a <strong>Recetas → Libro de recetas → Crear recetario</strong>. Dale un nombre (ej: el nombre de tu empresa). En "Dietas asociadas", selecciona las recetas que quieres incluir. Guarda.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Asigna el libro a la granja</div>
+          <div class="step-body">Ve a <strong>Recetas → Granjas</strong>. Ubica tu granja y haz clic en el ícono de edición. Asigna el recetario que acabas de crear. Este paso solo se hace una vez por granja.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Asigna la receta al punto de llenado</div>
+          <div class="step-body">Dentro del silo, en la gráfica amarilla, hay un punto que marca el momento de instalación o llenado. Haz clic sobre él y selecciona la receta que corresponde al alimento que entró en ese momento.</div>
+        </div>
+      </div>
+    </div>
+
+    <table class="ax-table">
+      <thead>
+        <tr><th>Campo</th><th>Qué poner</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Nombre de la dieta</strong></td>
+          <td>Fase + proveedor + fecha — ej: <em>Levante Premex Mayo 2026</em></td>
+        </tr>
+        <tr>
+          <td><strong>Código de la dieta</strong></td>
+          <td>Código del proveedor o, si no tienes, copia el mismo nombre</td>
+        </tr>
+        <tr>
+          <td><strong>Descripción</strong></td>
+          <td>Puedes copiar y pegar el nombre de la dieta</td>
+        </tr>
+        <tr>
+          <td><strong>Densidad</strong></td>
+          <td>Promedio de las 5 muestras en g/L (equivale a kg/m³)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout warning">
+      <span class="callout-icon"><i data-lucide="pencil" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>Convención de nombres recomendada</strong>
+        Siempre incluye la fase y la fecha: <em>Fase 3 Premex — Junio 2026</em>. Cuando vuelva ese mismo alimento en el próximo lote, crea una receta nueva con la nueva fecha y vuelve a medir la densidad, porque las materias primas pueden cambiar entre lotes.
+      </div>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <button class="btn btn-secondary" onclick="goTo(4)">
+      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      Anterior
+    </button>
+    <button class="btn btn-primary" onclick="goTo(6)">
+      Consumo
+      <i data-lucide="arrow-right" style="width:15px;height:15px;"></i>
+    </button>
+  </div>
+</div>
+
+<!-- ── S6: Consumo ─────────────────────────────────────────── -->
+<div class="section" id="section-6">
+  <div class="section-body">
+    <div class="section-header">
+      <div class="section-eyebrow">Sección 06</div>
+      <div class="section-title">Consumo y buenas prácticas</div>
+      <p class="section-desc">Cómo leer el consumo diario, qué significan los indicadores y las recomendaciones para sacarle el máximo partido a la plataforma.</p>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon"><i data-lucide="trending-down" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Consumo total</div>
+        <div class="card-body">Toneladas totales consumidas en el rango de fechas seleccionado. Aparece en la sección de consumo dentro de cada silo.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i data-lucide="bar-chart-2" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Consumo promedio</div>
+        <div class="card-body">Toneladas por día en promedio dentro del rango seleccionado. Útil para estimar cuántos días más dura el inventario actual.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i data-lucide="refresh-cw" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Consumo típico (30 días)</div>
+        <div class="card-body">Promedio de los últimos 30 días. Refleja la tendencia general del lote completo.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i data-lucide="zap" style="width:18px;height:18px;"></i></div>
+        <div class="card-title">Consumo actual (2 días)</div>
+        <div class="card-body">Promedio de los últimos 2 días. Más preciso en etapas de crecimiento como presebo y ceba, donde el consumo aumenta cada día.</div>
+      </div>
+    </div>
+
+    <div class="callout info">
+      <span class="callout-icon"><i data-lucide="info" style="width:16px;height:16px;"></i></span>
+      <div class="callout-content">
+        <strong>En presebo y ceba, usa el consumo de 2 días para proyectar</strong>
+        Como los animales crecen y consumen más cada día, el promedio de 30 días subestimaría el consumo real actual y podrías quedarte sin alimento antes de lo esperado.
+      </div>
+    </div>
+
+    <div class="practices-list">
+      <div class="practices-title">Buenas prácticas</div>
+      <div class="practice-item">
+        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <div><strong>Llena al 90%</strong> — evita el punto ciego del sensor y garantiza mediciones precisas todos los días.</div>
+      </div>
+      <div class="practice-item">
+        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <div><strong>Apaga los alimentadores en el llenado</strong> — si el alimento sale mientras entra, la medición del cargue será incorrecta.</div>
+      </div>
+      <div class="practice-item">
+        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <div><strong>Mide la densidad en cada lote</strong> — las materias primas cambian entre lotes y la densidad puede variar.</div>
+      </div>
+      <div class="practice-item">
+        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <div><strong>Nombra las recetas con fecha</strong> — así el historial es trazable lote por lote.</div>
+      </div>
+      <div class="practice-item">
+        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <div><strong>Revisa el panel todos los lunes</strong> — establece una rutina semanal de pedidos basada en el inventario real.</div>
+      </div>
+      <div class="practice-item">
+        <span class="practice-icon"><i data-lucide="check-circle" style="width:16px;height:16px;"></i></span>
+        <div><strong>Controla los tiempos de almacenamiento</strong> — si el alimento permanece mucho tiempo en el silo caliente puede aparecer condensación y favorecer el crecimiento de hongos o micotoxinas.</div>
+      </div>
+    </div>
+
+    <div class="quiz-card" id="quiz-6a">
+      <div class="quiz-label">Comprueba lo aprendido</div>
+      <div class="quiz-q">Hasta qué porcentaje se recomienda llenar el silo para no perder datos de medición?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="checkQuiz('quiz-6a',this,false)">100% — para aprovechar toda la capacidad</button>
+        <button class="quiz-option" onclick="checkQuiz('quiz-6a',this,true)">90% — para que el sensor pueda medir correctamente</button>
+        <button class="quiz-option" onclick="checkQuiz('quiz-6a',this,false)">70% — para tener margen de consumo</button>
+      </div>
+      <div class="quiz-feedback" id="quiz-6a-fb"></div>
+    </div>
+
+    <div class="quiz-card" id="quiz-6b">
+      <div class="quiz-label">Comprueba lo aprendido</div>
+      <div class="quiz-q">Cada cuándo debes medir la densidad del alimento?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="checkQuiz('quiz-6b',this,false)">Una sola vez al instalar el sistema</button>
+        <button class="quiz-option" onclick="checkQuiz('quiz-6b',this,false)">Cada 6 meses, sin importar el lote</button>
+        <button class="quiz-option" onclick="checkQuiz('quiz-6b',this,true)">En cada fase nutricional de cada lote activo</button>
+      </div>
+      <div class="quiz-feedback" id="quiz-6b-fb"></div>
+    </div>
+
+    <div class="completion-card">
+      <div class="completion-icon">
+        <i data-lucide="check" style="width:24px;height:24px;"></i>
+      </div>
+      <div class="completion-title">Tutorial completado</div>
+      <p class="completion-desc">Ya conoces los fundamentos de la plataforma Insylo. Para dudas adicionales, contacta al equipo de soporte o vuelve a consultar esta guía en cualquier momento.</p>
+    </div>
+  </div>
+
+  <div class="section-nav">
+    <button class="btn btn-secondary" onclick="goTo(5)">
+      <i data-lucide="arrow-left" style="width:15px;height:15px;"></i>
+      Anterior
+    </button>
+    <button class="btn btn-primary" onclick="goTo(0)">
+      <i data-lucide="rotate-ccw" style="width:15px;height:15px;"></i>
+      Volver al inicio
+    </button>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- Mobile toggle -->
+<button class="mobile-toggle" id="mobileToggle" onclick="openSidebar()">
+  <i data-lucide="menu" style="width:20px;height:20px;"></i>
+</button>
+
+<script>
+  // Init Lucide icons
+  document.addEventListener('DOMContentLoaded', () => { lucide.createIcons(); });
+
+  let current = 0;
+  const total = 7;
+  const visited = new Set([0]);
+
+  function goTo(n) {
+    // hide old
+    document.getElementById('section-' + current).classList.remove('active');
+    const oldNav = document.querySelector('.nav-item[data-s="' + current + '"]');
+    oldNav.classList.remove('active');
+    if (current !== n) {
+      oldNav.classList.add('done');
+      visited.add(n);
+    }
+    // show new
+    current = n;
+    document.getElementById('section-' + n).classList.add('active');
+    const newNav = document.querySelector('.nav-item[data-s="' + n + '"]');
+    newNav.classList.add('active');
+    newNav.classList.remove('done');
+
+    // scroll
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // progress
+    const pct = Math.round((visited.size / total) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressPct').textContent = pct + '%';
+
+    // close sidebar mobile
+    closeSidebar();
+    lucide.createIcons();
+  }
+
+  function openSidebar() {
+    document.getElementById('sidebar').classList.add('open');
+    document.getElementById('overlay').classList.add('open');
+  }
+
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+
+  function calcDensity() {
+    const vals = ['d1','d2','d3','d4','d5']
+      .map(id => parseFloat(document.getElementById(id).value))
+      .filter(v => !isNaN(v) && v > 0);
+    const el = document.getElementById('densityResult');
+    if (!vals.length) { el.textContent = '—'; return; }
+    const avg = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+    el.textContent = avg + ' kg/m³';
+  }
+
+  function checkQuiz(qid, btn, correct) {
+    const container = document.getElementById(qid);
+    container.querySelectorAll('.quiz-option').forEach(b => b.disabled = true);
+    btn.classList.add(correct ? 'correct' : 'incorrect');
+    const fb = document.getElementById(qid + '-fb');
+    fb.className = 'quiz-feedback show ' + (correct ? 'ok' : 'fail');
+    fb.textContent = correct
+      ? 'Correcto. Muy bien.'
+      : 'No es correcto. Revisa la sección y vuelve a intentarlo.';
+    lucide.createIcons();
+  }
+</script>
+</body>
+</html>
