@@ -32,6 +32,8 @@
     --outline-variant: #c1c7cf;
     --success: #166534;
     --success-bg: #dcfce7;
+    --primary-hover: #013351;
+    --border: rgba(114, 120, 127, 0.08);
 
     --sidebar-w: 268px;
 }
@@ -763,7 +765,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary:hover:not(:disabled) {
-    background: #013351;
+    background: var(--primary-hover);
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
@@ -1147,23 +1149,23 @@ h1, h2, h3, h4, h5, h6 {
       <div class="silo-wrap">
         <svg viewBox="0 0 100 190" fill="none" xmlns="http://www.w3.org/2000/svg">
           <!-- techo cónico -->
-          <polygon points="50,6 82,34 18,34" fill="#ECEEF1" stroke="#D8DCE0" stroke-width="1.5"/>
+          <polygon points="50,6 82,34 18,34" fill="#eaeef0" stroke="#c1c7cf" stroke-width="1.5"/>
           <!-- cuerpo silo -->
-          <rect x="18" y="33" width="64" height="120" rx="3" fill="#F5F6F8" stroke="#D8DCE0" stroke-width="1.5"/>
+          <rect x="18" y="33" width="64" height="120" rx="3" fill="#f0f4f5" stroke="#c1c7cf" stroke-width="1.5"/>
           <!-- alimento (70%) -->
           <rect x="19" y="69" width="62" height="83" fill="#dce8ed" rx="1"/>
           <!-- línea 90% -->
-          <line x1="17" y1="57" x2="83" y2="57" stroke="#2E8B57" stroke-width="1" stroke-dasharray="4,3"/>
-          <text x="85" y="60" font-family="SF Pro Display,Roboto,Helvetica,sans-serif" font-size="7" fill="#2E8B57" font-weight="600">90%</text>
+          <line x1="17" y1="57" x2="83" y2="57" stroke="#166534" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="85" y="60" font-family="Inter, sans-serif" font-size="7" fill="#166534" font-weight="600">90%</text>
           <!-- sensor -->
           <circle cx="50" cy="18" r="5" fill="#014469" stroke="#fff" stroke-width="1.5"/>
           <line x1="50" y1="23" x2="50" y2="60" stroke="#014469" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
           <!-- patas -->
-          <line x1="32" y1="153" x2="27" y2="178" stroke="#B4BDC4" stroke-width="2" stroke-linecap="round"/>
-          <line x1="50" y1="153" x2="50" y2="178" stroke="#B4BDC4" stroke-width="2" stroke-linecap="round"/>
-          <line x1="68" y1="153" x2="73" y2="178" stroke="#B4BDC4" stroke-width="2" stroke-linecap="round"/>
+          <line x1="32" y1="153" x2="27" y2="178" stroke="#c1c7cf" stroke-width="2" stroke-linecap="round"/>
+          <line x1="50" y1="153" x2="50" y2="178" stroke="#c1c7cf" stroke-width="2" stroke-linecap="round"/>
+          <line x1="68" y1="153" x2="73" y2="178" stroke="#c1c7cf" stroke-width="2" stroke-linecap="round"/>
           <!-- alimentador -->
-          <rect x="38" y="170" width="24" height="7" rx="2" fill="#ECEEF1" stroke="#D8DCE0" stroke-width="1"/>
+          <rect x="38" y="170" width="24" height="7" rx="2" fill="#eaeef0" stroke="#c1c7cf" stroke-width="1"/>
         </svg>
       </div>
       <div style="flex:1;">
@@ -1177,11 +1179,11 @@ h1, h2, h3, h4, h5, h6 {
           <div><strong>Nivel de alimento</strong> — toneladas actuales estimadas en el silo</div>
         </div>
         <div class="legend-item">
-          <div class="legend-dot" style="background:#2E8B57;"></div>
+          <div class="legend-dot" style="background:#166534;"></div>
           <div><strong>Nivel 90%</strong> — límite máximo recomendado para evitar punto ciego</div>
         </div>
         <div class="legend-item">
-          <div class="legend-dot" style="background:#B4BDC4;"></div>
+          <div class="legend-dot" style="background:#c1c7cf;"></div>
           <div><strong>Toneladas libres</strong> — capacidad disponible para el próximo cargue</div>
         </div>
       </div>
